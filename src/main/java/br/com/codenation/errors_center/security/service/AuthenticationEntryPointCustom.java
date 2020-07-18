@@ -1,5 +1,6 @@
 package br.com.codenation.errors_center.security.service;
 
+import br.com.codenation.errors_center.infrastructure.translate.Translator;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -18,7 +19,7 @@ public class AuthenticationEntryPointCustom implements AuthenticationEntryPoint 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException) throws IOException, ServletException {
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Erro: Usuário não autorizado.");
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, Translator.toLocale("user.auth.unauthorized_user"));
     }
 
 }

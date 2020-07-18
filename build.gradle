@@ -16,6 +16,7 @@ configurations {
 
 repositories {
 	mavenCentral()
+	jcenter()
 }
 
 dependencies {
@@ -26,21 +27,27 @@ dependencies {
 	 		'org.springframework.boot:spring-boot-starter-validation',
 	 		'org.springframework.boot:spring-boot-starter-actuator',
 	 		'org.springframework.boot:spring-boot-starter-security',
+			'io.springfox:springfox-bean-validators:3.0.0',
+			'io.jsonwebtoken:jjwt:0.9.1',
+	)
+
+	runtimeOnly(
+			'org.postgresql:postgresql',
+			'org.springframework.boot:spring-boot-devtools',
+			'javax.validation:validation-api:2.0.1.Final',
 	)
 
 	compileOnly (
 			'javax.validation:validation-api:2.0.1.Final',
-			'javax.servlet:javax.servlet-api:3.1.0',
-			'io.jsonwebtoken:jjwt:0.9.1',
 			'org.projectlombok:lombok',
-			'io.springfox:springfox-data-rest:3.0.0',
-			'io.springfox:springfox-swagger2:3.0.0',
-			'io.springfox:springfox-swagger-ui:3.0.0'
 	)
 
-	runtimeOnly 'org.postgresql:postgresql'
+	compile (
+			'io.springfox:springfox-boot-starter:3.0.0',
+			'io.springfox:springfox-oas:3.0.0',
+	)
+
 	annotationProcessor 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}

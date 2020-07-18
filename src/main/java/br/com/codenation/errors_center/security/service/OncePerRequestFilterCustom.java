@@ -1,5 +1,6 @@
 package br.com.codenation.errors_center.security.service;
 
+import br.com.codenation.errors_center.infrastructure.translate.Translator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,16 +20,11 @@ import java.io.IOException;
  */
 public class OncePerRequestFilterCustom extends OncePerRequestFilter {
 
-    /**
-     * The constant MSG_USER_NAO_AUTENTICADO.
-     */
-    public static final String MSG_USER_NAO_AUTENTICADO = "Não é possível definir a autenticação do usuário: {}";
-
     @Autowired
     private JwtService jwtService;
 
     @Autowired
-    private UserServiceImpl service;
+    private UserService service;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -44,7 +40,7 @@ public class OncePerRequestFilterCustom extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception e) {
-            logger.error(MSG_USER_NAO_AUTENTICADO, e);
+            logger.error(Translator.toLocale("user.auth.not_defined", e.getMessage()));
         }
 
         filterChain.doFilter(request, response);

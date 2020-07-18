@@ -7,7 +7,7 @@ import lombok.Data;
  * The type Jwt response dto.
  */
 @Data
-@ApiModel(value = "Response Token")
+@ApiModel(value = "Response Acess Bearer Token", description = "Response Acess Bearer Token")
 public class JwtResponseDTO {
     private String token;
     private String type = "Bearer";

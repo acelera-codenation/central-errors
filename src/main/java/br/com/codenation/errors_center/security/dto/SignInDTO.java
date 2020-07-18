@@ -1,21 +1,25 @@
 package br.com.codenation.errors_center.security.dto;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+
 
 /**
  * The type Login dto.
  */
 @Data
-@ApiModel(value = "Login")
+@ApiModel(value = "Login", description = "Login")
 public class SignInDTO {
 
-    @NotBlank(message = "O username não foi informado.")
+    @NotBlank(message = "{sign.username.not_blank}")
+    @ApiModelProperty(required = true)
     private String username;
 
-    @NotBlank(message = "O password não foi informado.")
+    @NotBlank(message = "{sign.username.not_blank}")
+    @ApiModelProperty(required = true)
     private String password;
 
 }

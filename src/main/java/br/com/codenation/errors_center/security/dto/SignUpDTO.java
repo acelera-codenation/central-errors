@@ -12,21 +12,21 @@ import javax.validation.constraints.Size;
  * The type Sign up dto.
  */
 @Data
-@ApiModel(value = "SignUp")
+@ApiModel(value = "SignUp", description = "SignUp")
 public class SignUpDTO {
-    @NotBlank
-    @Size(min = 3, max = 20, message = "O campo username deve conter entre 6 e 40 caracteres.")
-    @ApiModelProperty(value = "O username é um identificador único.")
+    @NotBlank(message = "{sign.username.not_blank}")
+    @Size(min = 3, max = 20, message = "{sign.username.size}")
+    @ApiModelProperty(required = true)
     private String username;
 
-    @NotBlank
-    @Size(max = 50)
+    @NotBlank(message = "{sign.email.not_blank}")
+    @Size(max = 50, message = "{sign.email.size}")
     @Email
-    @ApiModelProperty(value = "O email é um identificador único e deve ser válido.")
+    @ApiModelProperty(required = true)
     private String email;
 
-    @NotBlank
-    @Size(min = 6, max = 40, message = "O campo password deve conter entre 6 e 40 caracteres.")
-    @ApiModelProperty(value = "A senha deve conter entre 6 e 40 caracteres.")
+    @NotBlank(message = "{sign.password.not_blank}")
+    @Size(min = 6, max = 40, message = "{sign.password.size}")
+    @ApiModelProperty(required = true)
     private String password;
 }

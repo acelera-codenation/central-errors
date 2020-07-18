@@ -1,6 +1,7 @@
 package br.com.codenation.errors_center.security.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -11,13 +12,14 @@ import javax.validation.constraints.NotBlank;
  */
 @Entity
 @Data
+@EqualsAndHashCode(callSuper=false)
 @Table(
         name = "users",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "username"),
                 @UniqueConstraint(columnNames = "email")
         })
-public class User {
+public class User extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

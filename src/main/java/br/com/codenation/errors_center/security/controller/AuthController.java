@@ -1,5 +1,6 @@
 package br.com.codenation.errors_center.security.controller;
 
+import br.com.codenation.errors_center.infrastructure.translate.Translator;
 import br.com.codenation.errors_center.security.dto.JwtResponseDTO;
 import br.com.codenation.errors_center.security.dto.MessageDTO;
 import br.com.codenation.errors_center.security.dto.SignInDTO;
@@ -47,14 +48,14 @@ public class AuthController {
     /**
      * Authenticate user response entity.
      *
-     * @param signInDTO the login dto
+     * @param signIn the login dto
      * @return the response entity
      */
     @PostMapping("/signin")
-    public ResponseEntity<?> login(@Valid @RequestBody SignInDTO signInDTO) {
+    public ResponseEntity<?> login(@Valid @RequestBody SignInDTO signIn) {
 
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(signInDTO.getUsername(), signInDTO.getPassword()));
+                new UsernamePasswordAuthenticationToken(signIn.getUsername(), signIn.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtService.generateJwtToken(authentication);
@@ -69,29 +70,29 @@ public class AuthController {
     /**
      * Register user response entity.
      *
-     * @param signUpRequest the sign up request
+     * @param signUp the sign up request
      * @return the response entity
      */
     @PostMapping("/signup")
-    public ResponseEntity<?> register(@Valid @RequestBody SignUpDTO signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+    public ResponseEntity<?> register(@Valid @RequestBody SignUpDTO signUp) {
+        if (userRepository.existsByUsername(signUp.getUsername())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageDTO("Erro: Usuário já está registrado!"));
+                    .body(translate("sign.user.exists"));
         }
 
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+        if (userRepository.existsByEmail(signUp.getEmail())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageDTO("Erro: O email já está cadastrado!"));
+                    .body(translate("sign.email.exists"));
         }
 
-        User user = new User(signUpRequest.getUsername(),
-                signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
+        User user = new User(signUp.getUsername(),
+                signUp.getEmail(),
+                encoder.encode(signUp.getPassword()));
 
         userRepository.save(user);
-        return ResponseEntity.ok(new MessageDTO("Usuário registrado com sucesso!"));
+        return ResponseEntity.ok(translate("sign.register.success"));
     }
 
 
@@ -111,5 +112,9 @@ public class AuthController {
                 .orElse(exception.getMessage());
 
         return ResponseEntity.badRequest().body(errorMsg);
+    }
+
+    private MessageDTO translate(String msgKey) {
+        return new MessageDTO(Translator.toLocale(msgKey));
     }
 }

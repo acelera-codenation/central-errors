@@ -2,7 +2,7 @@ package br.com.codenation.errors_center.security;
 
 import br.com.codenation.errors_center.security.service.AuthenticationEntryPointCustom;
 import br.com.codenation.errors_center.security.service.OncePerRequestFilterCustom;
-import br.com.codenation.errors_center.security.service.UserServiceImpl;
+import br.com.codenation.errors_center.security.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,7 +27,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserServiceImpl service;
+    private UserService service;
 
     @Autowired
     private AuthenticationEntryPointCustom authenticationEntryPointCustom;
@@ -69,13 +69,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPointCustom).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers("/swagger-ui.html",
+                .antMatchers("/swagger-ui/**",
                         "/swagger-resources/**",
                         "/v2/**",
                         "/csrf",
                         "/webjars/**",
                         "/actuator/**",
-                        "/auth/**").permitAll()
+                        "/auth/**",
+                        "/api/**").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

@@ -57,6 +57,10 @@ public class JwtService {
                 .getSubject();
     }
 
+    private void log(String msgKey, Exception e) {
+        logger.error(msgKey, e.getMessage());
+    }
+
     /**
      * Validate jwt token boolean.
      *
@@ -70,15 +74,15 @@ public class JwtService {
                     .parseClaimsJws(authToken);
             return true;
         } catch (SignatureException e) {
-            logger.error("JWT Assinatura inválida: {}.", e.getMessage());
+            log("jwt.invalid_sign", e);
         } catch (MalformedJwtException e) {
-            logger.error("JWT token inválido: {}.", e.getMessage());
+            log("jwt.invalid_token", e);
         } catch (ExpiredJwtException e) {
-            logger.error("JWT token expirado: {}.", e.getMessage());
+            log("jwt.expired_token", e);
         } catch (UnsupportedJwtException e) {
-            logger.error("JWT token não suportado: {}.", e.getMessage());
+            log("jwt.unsupported_token", e);
         } catch (IllegalArgumentException e) {
-            logger.error("JWT token não informado: {}.", e.getMessage());
+            log("jwt.token_not_informed", e);
         }
 
         return false;
