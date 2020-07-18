@@ -1,19 +1,16 @@
-package br.com.codenation.errors_center.security.model;
+package br.com.codenation.errors_center.security.entity;
 
-import lombok.Getter;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Objects;
 
 /**
  * The type User details custom.
  */
-@Getter
-@Setter
+@Data
 @RequiredArgsConstructor
 public class UserDetailsCustom implements UserDetails {
 
@@ -70,13 +67,5 @@ public class UserDetailsCustom implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserDetailsCustom user = (UserDetailsCustom) o;
-        return Objects.equals(id, user.id);
     }
 }

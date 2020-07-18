@@ -1,6 +1,6 @@
 package br.com.codenation.errors_center.security.repository;
 
-import br.com.codenation.errors_center.security.model.User;
+import br.com.codenation.errors_center.security.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

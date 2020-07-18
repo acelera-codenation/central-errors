@@ -1,8 +1,8 @@
 package br.com.codenation.errors_center.security.service;
 
 import br.com.codenation.errors_center.infrastructure.translate.Translator;
-import br.com.codenation.errors_center.security.model.User;
-import br.com.codenation.errors_center.security.model.UserDetailsCustom;
+import br.com.codenation.errors_center.security.entity.User;
+import br.com.codenation.errors_center.security.entity.UserDetailsCustom;
 import br.com.codenation.errors_center.security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;

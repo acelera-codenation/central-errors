@@ -1,6 +1,6 @@
 package br.com.codenation.errors_center.security.service;
 
-import br.com.codenation.errors_center.security.model.UserDetailsCustom;
+import br.com.codenation.errors_center.security.entity.UserDetailsCustom;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

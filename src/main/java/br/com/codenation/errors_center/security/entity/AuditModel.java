@@ -1,4 +1,4 @@
-package br.com.codenation.errors_center.security.model;
+package br.com.codenation.errors_center.security.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;
