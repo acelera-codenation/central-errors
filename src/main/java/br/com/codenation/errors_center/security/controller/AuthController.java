@@ -52,7 +52,7 @@ public class AuthController {
      * @return the response entity
      */
     @PostMapping("/signin")
-    public ResponseEntity<?> login(@Valid @RequestBody SignInDTO signIn) {
+    public ResponseEntity<JwtResponseDTO> login(@Valid @RequestBody SignInDTO signIn) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(signIn.getUsername(), signIn.getPassword()));
@@ -74,14 +74,16 @@ public class AuthController {
      * @return the response entity
      */
     @PostMapping("/signup")
-    public ResponseEntity<?> register(@Valid @RequestBody SignUpDTO signUp) {
-        if (userRepository.existsByUsername(signUp.getUsername())) {
+    public ResponseEntity<MessageDTO> register(@Valid @RequestBody SignUpDTO signUp) {
+        Boolean existsByUsername = userRepository.existsByUsername(signUp.getUsername());
+        if (existsByUsername) {
             return ResponseEntity
                     .badRequest()
                     .body(translate("sign.user.exists"));
         }
 
-        if (userRepository.existsByEmail(signUp.getEmail())) {
+        Boolean existsByEmail = userRepository.existsByEmail(signUp.getEmail());
+        if (existsByEmail) {
             return ResponseEntity
                     .badRequest()
                     .body(translate("sign.email.exists"));
@@ -104,7 +106,7 @@ public class AuthController {
      */
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity handleException(MethodArgumentNotValidException exception) {
+    public ResponseEntity<String> handleException(MethodArgumentNotValidException exception) {
 
         String errorMsg = exception.getBindingResult().getFieldErrors().stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)

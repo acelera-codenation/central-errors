@@ -16,7 +16,7 @@ import java.util.Locale;
 @Component
 public class CustomLocaleResolver extends AcceptHeaderLocaleResolver implements WebMvcConfigurer {
 
-    List<Locale> LOCALES = Arrays.asList(
+    List<Locale> locales = Arrays.asList(
             new Locale("en"),
             new Locale("pt", "BR"));
 
@@ -25,7 +25,7 @@ public class CustomLocaleResolver extends AcceptHeaderLocaleResolver implements 
         String headerLang = request.getHeader("Accept-Language");
         return headerLang == null || headerLang.isEmpty()
                 ? Locale.getDefault()
-                : Locale.lookup(Locale.LanguageRange.parse(headerLang), LOCALES);
+                : Locale.lookup(Locale.LanguageRange.parse(headerLang), locales);
     }
 
     @Bean
@@ -39,6 +39,7 @@ public class CustomLocaleResolver extends AcceptHeaderLocaleResolver implements 
     }
 
     @Bean
+    @Override
     public LocalValidatorFactoryBean getValidator() {
         LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
         bean.setValidationMessageSource(messageSource());

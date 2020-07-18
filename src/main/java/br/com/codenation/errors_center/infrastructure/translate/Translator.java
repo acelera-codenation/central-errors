@@ -14,7 +14,7 @@ public class Translator {
 
     @Autowired
     Translator(MessageSource messageSource) {
-        Translator.messageSource = messageSource;
+        this.messageSource = messageSource;
     }
 
     public static String toLocale(String msg) {
