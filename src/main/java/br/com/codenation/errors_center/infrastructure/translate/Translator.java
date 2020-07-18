@@ -10,19 +10,19 @@ import java.util.Locale;
 @Component
 public class Translator {
 
-    private static MessageSource messageSource;
+    private MessageSource messageSource;
 
     @Autowired
-    Translator(MessageSource messageSource) {
+    public Translator(MessageSource messageSource) {
         this.messageSource = messageSource;
     }
 
-    public static String toLocale(String msg) {
+    public String toLocale(String msg) {
         Locale locale = LocaleContextHolder.getLocale();
         return messageSource.getMessage(msg, null, locale);
     }
 
-    public static String toLocale(String msg, String... args) {
+    public String toLocale(String msg, String... args) {
         Locale locale = LocaleContextHolder.getLocale();
         return messageSource.getMessage(msg, args, locale);
     }

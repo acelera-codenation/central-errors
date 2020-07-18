@@ -26,6 +26,9 @@ public class OncePerRequestFilterCustom extends OncePerRequestFilter {
     @Autowired
     private UserService service;
 
+    @Autowired
+    private Translator translator;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
@@ -40,7 +43,7 @@ public class OncePerRequestFilterCustom extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception e) {
-            logger.error(Translator.toLocale("user.auth.not_defined", e.getMessage()));
+            logger.error(translator.toLocale("user.auth.not_defined", e.getMessage()));
         }
 
         filterChain.doFilter(request, response);

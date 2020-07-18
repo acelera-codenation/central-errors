@@ -31,7 +31,7 @@ import javax.validation.Valid;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/auth")
-@Api(value = "auth", produces = "application/json", consumes = "application/json", description = "Authorization")
+@Api(value = "auth", produces = "application/json", consumes = "application/json")
 public class AuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -44,6 +44,9 @@ public class AuthController {
 
     @Autowired
     private JwtService jwtService;
+
+    @Autowired
+    private Translator translator;
 
     /**
      * Authenticate user response entity.
@@ -75,15 +78,13 @@ public class AuthController {
      */
     @PostMapping("/signup")
     public ResponseEntity<MessageDTO> register(@Valid @RequestBody SignUpDTO signUp) {
-        Boolean existsByUsername = userRepository.existsByUsername(signUp.getUsername());
-        if (existsByUsername) {
+        if (userRepository.existsByUsername(signUp.getUsername())) {
             return ResponseEntity
                     .badRequest()
                     .body(translate("sign.user.exists"));
         }
 
-        Boolean existsByEmail = userRepository.existsByEmail(signUp.getEmail());
-        if (existsByEmail) {
+        if (userRepository.existsByEmail(signUp.getEmail())) {
             return ResponseEntity
                     .badRequest()
                     .body(translate("sign.email.exists"));
@@ -117,6 +118,6 @@ public class AuthController {
     }
 
     private MessageDTO translate(String msgKey) {
-        return new MessageDTO(Translator.toLocale(msgKey));
+        return new MessageDTO(translator.toLocale(msgKey));
     }
 }

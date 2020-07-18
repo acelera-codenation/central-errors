@@ -19,10 +19,13 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository repository;
 
+    @Autowired
+    private Translator translator;
+
     @Override
     public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String username) {
         User user = repository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException(Translator.toLocale("user.not_found", username)));
+                .orElseThrow(() -> new UsernameNotFoundException(translator.toLocale("user.not_found", username)));
         return UserDetailsCustom.build(user);
     }
 }
