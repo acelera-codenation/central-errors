@@ -80,8 +80,8 @@ test {
 jacocoTestReport {
 	dependsOn test
 	reports {
-		xml.enabled false
-		csv.enabled false
+		xml.enabled true
+		csv.enabled true
 		html.destination file("${buildDir}/jacocoHtml")
 	}
 }
