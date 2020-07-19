@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomTranslator {
 
-    private static MessageSource messageSource;
+    static MessageSource messageSource;
 
     @Autowired
     CustomTranslator(MessageSource msg) {
