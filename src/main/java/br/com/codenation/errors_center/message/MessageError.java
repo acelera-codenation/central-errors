@@ -1,4 +1,4 @@
-package br.com.codenation.errors_center.security.dto;
+package br.com.codenation.errors_center.message;
 
 import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
@@ -10,6 +10,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @ApiModel(value = "Message")
-public class MessageDTO {
+public class MessageError {
     private String message;
 }

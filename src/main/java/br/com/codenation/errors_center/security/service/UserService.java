@@ -1,6 +1,6 @@
 package br.com.codenation.errors_center.security.service;
 
-import br.com.codenation.errors_center.infrastructure.translate.Translator;
+import br.com.codenation.errors_center.infrastructure.translate.CustomTranslator;
 import br.com.codenation.errors_center.security.entity.User;
 import br.com.codenation.errors_center.security.entity.UserDetailsCustom;
 import br.com.codenation.errors_center.security.repository.UserRepository;
@@ -19,13 +19,10 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository repository;
 
-    @Autowired
-    private Translator translator;
-
     @Override
-    public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String username) {
+    public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = repository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException(translator.toLocale("user.not_found", username)));
+                .orElseThrow(() -> new UsernameNotFoundException(CustomTranslator.toLocale("user.not_found", username)));
         return UserDetailsCustom.build(user);
     }
 }

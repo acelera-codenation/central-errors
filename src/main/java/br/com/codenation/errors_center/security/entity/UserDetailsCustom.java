@@ -20,15 +20,7 @@ public class UserDetailsCustom implements UserDetails {
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
 
-    /**
-     * Instantiates a new User details custom.
-     *
-     * @param id       the id
-     * @param username the username
-     * @param email    the email
-     * @param password the password
-     */
-    public UserDetailsCustom(Long id, String username, String email, String password) {
+    private UserDetailsCustom(Long id, String username, String email, String password) {
         this.id = id;
         this.username = username;
         this.email = email;

@@ -1,9 +1,9 @@
 package br.com.codenation.errors_center.infrastructure.config;
 
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
@@ -13,37 +13,51 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-@Component
+@Configuration
 public class CustomLocaleResolver extends AcceptHeaderLocaleResolver implements WebMvcConfigurer {
 
-    List<Locale> locales = Arrays.asList(
+    private final List<Locale> LOCALES = Arrays.asList(
             new Locale("en"),
             new Locale("pt", "BR"));
 
     @Override
     public Locale resolveLocale(HttpServletRequest request) {
         String headerLang = request.getHeader("Accept-Language");
+
         return headerLang == null || headerLang.isEmpty()
-                ? Locale.getDefault()
-                : Locale.lookup(Locale.LanguageRange.parse(headerLang), locales);
+                ? Locale.ENGLISH
+                : Locale.lookup(Locale.LanguageRange.parse(headerLang), LOCALES);
     }
 
     @Bean
-    public MessageSource messageSource() {
-        ReloadableResourceBundleMessageSource rs
-                = new ReloadableResourceBundleMessageSource();
+    public ResourceBundleMessageSource messageSource() {
+        ResourceBundleMessageSource rs = new ResourceBundleMessageSource();
         rs.setBasename("messages");
         rs.setDefaultEncoding("UTF-8");
         rs.setUseCodeAsDefaultMessage(true);
         return rs;
     }
 
+//    @Bean
+//    public MessageSource messageSource() {
+//        ReloadableResourceBundleMessageSource rs
+//                = new ReloadableResourceBundleMessageSource();
+//        rs.setBasename("messages");
+//        rs.setDefaultEncoding("UTF-8");
+//        rs.setUseCodeAsDefaultMessage(true);
+//        return rs;
+//    }
+
     @Bean
     @Override
-    public LocalValidatorFactoryBean getValidator() {
+    public Validator getValidator() {
         LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
         bean.setValidationMessageSource(messageSource());
         return bean;
     }
 
+    @Override
+    public List<Locale> getSupportedLocales() {
+        return LOCALES;
+    }
 }

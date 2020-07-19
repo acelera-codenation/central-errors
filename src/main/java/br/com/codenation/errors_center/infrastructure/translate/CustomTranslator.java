@@ -8,22 +8,24 @@ import org.springframework.stereotype.Component;
 import java.util.Locale;
 
 @Component
-public class Translator {
+public class CustomTranslator {
 
-    private MessageSource messageSource;
+    private static MessageSource messageSource;
 
     @Autowired
-    public Translator(MessageSource messageSource) {
-        this.messageSource = messageSource;
+    CustomTranslator(MessageSource messageSource) {
+        CustomTranslator.messageSource = messageSource;
     }
 
-    public String toLocale(String msg) {
+    public static String toLocale(String msg) {
         Locale locale = LocaleContextHolder.getLocale();
-        return messageSource.getMessage(msg, null, locale);
+        return messageSource.getMessage(msg, null, null);
     }
 
-    public String toLocale(String msg, String... args) {
+    public static String toLocale(String msg, String... args) {
+
+
         Locale locale = LocaleContextHolder.getLocale();
-        return messageSource.getMessage(msg, args, locale);
+        return messageSource.getMessage(msg, args, null);
     }
 }

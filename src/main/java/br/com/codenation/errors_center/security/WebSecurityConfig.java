@@ -1,6 +1,5 @@
 package br.com.codenation.errors_center.security;
 
-import br.com.codenation.errors_center.security.service.AuthenticationEntryPointCustom;
 import br.com.codenation.errors_center.security.service.OncePerRequestFilterCustom;
 import br.com.codenation.errors_center.security.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +27,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserService service;
-
-    @Autowired
-    private AuthenticationEntryPointCustom authenticationEntryPointCustom;
 
     /**
      * Authentication jwt token filter once per request filter custom.
@@ -66,7 +62,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
-                .exceptionHandling().authenticationEntryPoint(authenticationEntryPointCustom).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
                 .antMatchers("/swagger-ui/**",

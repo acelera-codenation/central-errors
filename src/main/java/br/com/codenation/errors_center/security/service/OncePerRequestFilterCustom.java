@@ -1,6 +1,6 @@
 package br.com.codenation.errors_center.security.service;
 
-import br.com.codenation.errors_center.infrastructure.translate.Translator;
+import br.com.codenation.errors_center.infrastructure.translate.CustomTranslator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,9 +26,6 @@ public class OncePerRequestFilterCustom extends OncePerRequestFilter {
     @Autowired
     private UserService service;
 
-    @Autowired
-    private Translator translator;
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
@@ -43,7 +40,7 @@ public class OncePerRequestFilterCustom extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception e) {
-            logger.error(translator.toLocale("user.auth.not_defined", e.getMessage()));
+            logger.error(CustomTranslator.toLocale("user.auth.not_defined", e.getMessage()));
         }
 
         filterChain.doFilter(request, response);

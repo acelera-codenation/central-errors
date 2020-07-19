@@ -1,8 +1,8 @@
 package br.com.codenation.errors_center.security.controller;
 
-import br.com.codenation.errors_center.infrastructure.translate.Translator;
+import br.com.codenation.errors_center.infrastructure.translate.CustomTranslator;
 import br.com.codenation.errors_center.security.dto.JwtResponseDTO;
-import br.com.codenation.errors_center.security.dto.MessageDTO;
+import br.com.codenation.errors_center.message.MessageError;
 import br.com.codenation.errors_center.security.dto.SignInDTO;
 import br.com.codenation.errors_center.security.dto.SignUpDTO;
 import br.com.codenation.errors_center.security.entity.User;
@@ -11,15 +11,12 @@ import br.com.codenation.errors_center.security.repository.UserRepository;
 import br.com.codenation.errors_center.security.service.JwtService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -45,9 +42,6 @@ public class AuthController {
     @Autowired
     private JwtService jwtService;
 
-    @Autowired
-    private Translator translator;
-
     /**
      * Authenticate user response entity.
      *
@@ -68,6 +62,7 @@ public class AuthController {
                 userDetailsCustom.getId(),
                 userDetailsCustom.getUsername(),
                 userDetailsCustom.getEmail()));
+
     }
 
     /**
@@ -77,7 +72,7 @@ public class AuthController {
      * @return the response entity
      */
     @PostMapping("/signup")
-    public ResponseEntity<MessageDTO> register(@Valid @RequestBody SignUpDTO signUp) {
+    public ResponseEntity<MessageError> register(@Valid @RequestBody SignUpDTO signUp) {
         if (userRepository.existsByUsername(signUp.getUsername())) {
             return ResponseEntity
                     .badRequest()
@@ -99,25 +94,7 @@ public class AuthController {
     }
 
 
-    /**
-     * Handle exception response entity.
-     *
-     * @param exception the exception
-     * @return the response entity
-     */
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<String> handleException(MethodArgumentNotValidException exception) {
-
-        String errorMsg = exception.getBindingResult().getFieldErrors().stream()
-                .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                .findFirst()
-                .orElse(exception.getMessage());
-
-        return ResponseEntity.badRequest().body(errorMsg);
-    }
-
-    private MessageDTO translate(String msgKey) {
-        return new MessageDTO(translator.toLocale(msgKey));
+    private MessageError translate(String msgKey) {
+        return new MessageError(CustomTranslator.toLocale(msgKey));
     }
 }
