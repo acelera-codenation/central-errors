@@ -83,13 +83,20 @@ jacocoTestReport {
 		xml.enabled true
 		csv.enabled true
 		html.destination file("${buildDir}/jacocoHtml")
+
 	}
+}
+ext {
+	sonarProjectKey = 'acelera-codenation_erros-center'
+	jacocoDestinationFile = "${buildDir}/jacoco/test.exec"
+	jacocoExclusions = ['**/Main*']
 }
 
 sonarqube {
 	properties {
 		property "sonar.projectKey", "acelera-codenation_erros-center"
 		property "sonar.organization", "samuelssantos"
+		property "sonar.java.coveragePlugin", "jacoco"
 		property "sonar.host.url", "https://sonarcloud.io"
 		property "sonar.login", System.getenv("SONAR_TOKEN")
 	}
