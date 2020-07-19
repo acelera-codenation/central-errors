@@ -10,27 +10,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 @RestControllerAdvice
 public class CustomResponseExceptionHandle {
-
-    @ExceptionHandler({ConstraintViolationException.class})
-    ResponseEntity<Set<String>> handleConstraintViolation(ConstraintViolationException e) {
-        Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
-        Set<String> messages = new HashSet<>(constraintViolations.size());
-        messages.addAll(constraintViolations.stream()
-                .map(ConstraintViolation::getMessage)
-                .collect(Collectors.toList()));
-
-        return ResponseEntity
-                .badRequest()
-                .body(messages);
-    }
 
     @ExceptionHandler({MethodArgumentNotValidException.class})
     public ResponseEntity<String> handleException(MethodArgumentNotValidException e) {
