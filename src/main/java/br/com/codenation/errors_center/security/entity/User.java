@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
  */
 @Entity
 @Data
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 @Table(
         name = "users",
         uniqueConstraints = {

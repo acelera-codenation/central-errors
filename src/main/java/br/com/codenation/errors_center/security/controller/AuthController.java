@@ -1,8 +1,8 @@
 package br.com.codenation.errors_center.security.controller;
 
 import br.com.codenation.errors_center.infrastructure.translate.CustomTranslator;
-import br.com.codenation.errors_center.security.dto.JwtResponseDTO;
 import br.com.codenation.errors_center.message.MessageError;
+import br.com.codenation.errors_center.security.dto.JwtResponseDTO;
 import br.com.codenation.errors_center.security.dto.SignInDTO;
 import br.com.codenation.errors_center.security.dto.SignUpDTO;
 import br.com.codenation.errors_center.security.entity.User;

@@ -20,12 +20,12 @@ import java.util.stream.Collectors;
 public class CustomResponseExceptionHandle {
 
     @ExceptionHandler({ConstraintViolationException.class})
-    ResponseEntity<?> handleConstraintViolation(ConstraintViolationException e) {
+    ResponseEntity<Set<String>> handleConstraintViolation(ConstraintViolationException e) {
         Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
 
         Set<String> messages = new HashSet<>(constraintViolations.size());
         messages.addAll(constraintViolations.stream()
-                .map(constraintViolation -> constraintViolation.getMessage())
+                .map(ConstraintViolation::getMessage)
                 .collect(Collectors.toList()));
 
         return ResponseEntity

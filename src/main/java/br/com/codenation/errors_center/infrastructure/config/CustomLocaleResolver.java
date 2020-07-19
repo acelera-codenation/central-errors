@@ -38,16 +38,6 @@ public class CustomLocaleResolver extends AcceptHeaderLocaleResolver implements 
         return rs;
     }
 
-//    @Bean
-//    public MessageSource messageSource() {
-//        ReloadableResourceBundleMessageSource rs
-//                = new ReloadableResourceBundleMessageSource();
-//        rs.setBasename("messages");
-//        rs.setDefaultEncoding("UTF-8");
-//        rs.setUseCodeAsDefaultMessage(true);
-//        return rs;
-//    }
-
     @Bean
     @Override
     public Validator getValidator() {

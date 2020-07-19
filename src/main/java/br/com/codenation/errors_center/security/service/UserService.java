@@ -20,7 +20,7 @@ public class UserService implements UserDetailsService {
     private UserRepository repository;
 
     @Override
-    public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String username) {
         User user = repository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException(CustomTranslator.toLocale("user.not_found", username)));
         return UserDetailsCustom.build(user);

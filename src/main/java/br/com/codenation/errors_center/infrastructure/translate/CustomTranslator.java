@@ -5,8 +5,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 
-import java.util.Locale;
-
 @Component
 public class CustomTranslator {
 
@@ -18,14 +16,10 @@ public class CustomTranslator {
     }
 
     public static String toLocale(String msg) {
-        Locale locale = LocaleContextHolder.getLocale();
-        return messageSource.getMessage(msg, null, null);
+        return messageSource.getMessage(msg, null, LocaleContextHolder.getLocale());
     }
 
     public static String toLocale(String msg, String... args) {
-
-
-        Locale locale = LocaleContextHolder.getLocale();
-        return messageSource.getMessage(msg, args, null);
+        return messageSource.getMessage(msg, args, LocaleContextHolder.getLocale());
     }
 }
