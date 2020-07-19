@@ -12,7 +12,6 @@ import java.util.Collection;
  * The type User details custom.
  */
 @Getter
-@Setter
 @RequiredArgsConstructor
 public class UserDetailsCustom implements UserDetails {
 

@@ -12,8 +12,6 @@ import javax.validation.constraints.NotBlank;
  */
 @Entity
 @Getter
-@Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Table(
         name = "users",

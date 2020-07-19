@@ -157,25 +157,20 @@ class AuthControllerTest {
         user.setEmail("teste1@teste.com");
         user.setUsername("teste1");
         String accessToken = obtainAccessToken(user);
-        MvcResult result = mockMvc.perform(get("/api/events")
+        mockMvc.perform(get("/api/events")
                 .header("Authorization", "Bearer " + accessToken))
-                .andReturn();
-
-        System.out.println(result.getResponse().getContentAsString());
+                .andExpect(status().isOk());
     }
 
     @Test
     void invalidAccessToken() throws Exception {
         user.setEmail("invalidAccessToken@teste.com");
         user.setUsername("invalidAccessToken");
-        String accessToken = obtainAccessToken(user) + "invalid";
-        MvcResult result = mockMvc.perform(get("/api/events")
-                .header("Authorization", "Bearer " + accessToken))
-                .andReturn();
-
-        System.out.println(result.getResponse().getContentAsString());
+        String accessToken = obtainAccessToken(user);
+        mockMvc.perform(get("/api/events")
+                .header("Authorization", "Bearer " + accessToken + "invalid"))
+                .andExpect(status().is4xxClientError());
     }
-
 
     private String obtainAccessToken(SignUpDTO userToken) throws Exception {
 

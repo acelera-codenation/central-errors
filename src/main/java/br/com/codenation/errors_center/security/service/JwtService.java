@@ -73,16 +73,8 @@ public class JwtService {
                     .setSigningKey(jwtSecret)
                     .parseClaimsJws(authToken);
             return true;
-        } catch (SignatureException e) {
+        } catch (JwtException e) {
             log("jwt.invalid_sign", e);
-        } catch (MalformedJwtException e) {
-            log("jwt.invalid_token", e);
-        } catch (ExpiredJwtException e) {
-            log("jwt.expired_token", e);
-        } catch (UnsupportedJwtException e) {
-            log("jwt.unsupported_token", e);
-        } catch (IllegalArgumentException e) {
-            log("jwt.token_not_informed", e);
         }
 
         return false;
