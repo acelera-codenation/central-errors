@@ -11,8 +11,8 @@ public class CustomTranslator {
     private static MessageSource messageSource;
 
     @Autowired
-    CustomTranslator(MessageSource messageSource) {
-        CustomTranslator.messageSource = messageSource;
+    CustomTranslator(MessageSource msg) {
+        messageSource = msg;
     }
 
     public static String toLocale(String msg) {
