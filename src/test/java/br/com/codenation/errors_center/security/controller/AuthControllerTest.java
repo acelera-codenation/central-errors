@@ -1,5 +1,6 @@
 package br.com.codenation.errors_center.security.controller;
 
+import br.com.codenation.errors_center.security.dto.JwtResponseDTO;
 import br.com.codenation.errors_center.security.dto.SignInDTO;
 import br.com.codenation.errors_center.security.dto.SignUpDTO;
 import br.com.codenation.errors_center.security.repository.UserRepository;
@@ -14,6 +15,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -136,9 +138,64 @@ class AuthControllerTest {
     }
 
     @Test
+    void signInBadCredentials() throws Exception {
+        login.setUsername("badcredentials");
+        mockMvc.perform(post("/auth/signin")
+                .contentType("application/json")
+                .content(objectMapper.writeValueAsString(login)))
+                .andExpect(status().is4xxClientError());
+    }
+
+    @Test
     void invalidAccess() throws Exception {
         mockMvc.perform(get("/api/events"))
                 .andExpect(status().is4xxClientError());
+    }
+
+    @Test
+    void validAccess() throws Exception {
+        user.setEmail("teste1@teste.com");
+        user.setUsername("teste1");
+        String accessToken = obtainAccessToken(user);
+        MvcResult result = mockMvc.perform(get("/api/events")
+                .header("Authorization", "Bearer " + accessToken))
+                .andReturn();
+
+        System.out.println(result.getResponse().getContentAsString());
+    }
+
+    @Test
+    void invalidAccessToken() throws Exception {
+        user.setEmail("invalidAccessToken@teste.com");
+        user.setUsername("invalidAccessToken");
+        String accessToken = obtainAccessToken(user) + "invalid";
+        MvcResult result = mockMvc.perform(get("/api/events")
+                .header("Authorization", "Bearer " + accessToken))
+                .andReturn();
+
+        System.out.println(result.getResponse().getContentAsString());
+    }
+
+
+    private String obtainAccessToken(SignUpDTO userToken) throws Exception {
+
+        login.setUsername(userToken.getUsername());
+        mockMvc.perform(post("/auth/signup")
+                .contentType("application/json")
+                .content(objectMapper.writeValueAsString(userToken)))
+                .andExpect(status().isOk());
+
+
+        MvcResult result = mockMvc.perform(post("/auth/signin")
+                .contentType("application/json")
+                .content(objectMapper.writeValueAsString(login)))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String contentAsString = result.getResponse().getContentAsString();
+        JwtResponseDTO jwt = objectMapper.readValue(contentAsString, JwtResponseDTO.class);
+
+        return jwt.getToken();
     }
 
 

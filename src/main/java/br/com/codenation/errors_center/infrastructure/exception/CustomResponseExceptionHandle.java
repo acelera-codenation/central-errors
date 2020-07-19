@@ -22,7 +22,6 @@ public class CustomResponseExceptionHandle {
     @ExceptionHandler({ConstraintViolationException.class})
     ResponseEntity<Set<String>> handleConstraintViolation(ConstraintViolationException e) {
         Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
-
         Set<String> messages = new HashSet<>(constraintViolations.size());
         messages.addAll(constraintViolations.stream()
                 .map(ConstraintViolation::getMessage)
@@ -33,8 +32,7 @@ public class CustomResponseExceptionHandle {
                 .body(messages);
     }
 
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler({MethodArgumentNotValidException.class})
     public ResponseEntity<String> handleException(MethodArgumentNotValidException e) {
 
         String errorMsg = e.getBindingResult().getFieldErrors().stream()
