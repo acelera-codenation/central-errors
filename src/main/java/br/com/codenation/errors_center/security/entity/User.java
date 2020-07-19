@@ -1,7 +1,7 @@
 package br.com.codenation.errors_center.security.entity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -11,14 +11,17 @@ import javax.validation.constraints.NotBlank;
  * The type User.
  */
 @Entity
-@Data
-@EqualsAndHashCode(callSuper = false)
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(
         name = "users",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "username"),
                 @UniqueConstraint(columnNames = "email")
         })
+@EntityListeners(AuditingEntityListener.class)
 public class User extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,11 +50,5 @@ public class User extends AuditModel {
         this.username = username;
         this.email = email;
         this.password = password;
-    }
-
-    /**
-     * Instantiates a new User.
-     */
-    public User() {
     }
 }

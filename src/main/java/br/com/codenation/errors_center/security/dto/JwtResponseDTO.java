@@ -1,12 +1,14 @@
 package br.com.codenation.errors_center.security.dto;
 
 import io.swagger.annotations.ApiModel;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * The type Jwt response dto.
  */
-@Data
+@Getter
+@Setter
 @ApiModel(value = "Response Acess Bearer Token", description = "Response Acess Bearer Token")
 public class JwtResponseDTO {
     private String token;

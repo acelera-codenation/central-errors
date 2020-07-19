@@ -2,7 +2,8 @@ package br.com.codenation.errors_center.security.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -11,7 +12,8 @@ import javax.validation.constraints.Size;
 /**
  * The type Sign up dto.
  */
-@Data
+@Getter
+@Setter
 @ApiModel(value = "SignUp", description = "SignUp")
 public class SignUpDTO {
     @NotBlank(message = "{sign.username.not_blank}")

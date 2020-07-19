@@ -7,7 +7,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -15,11 +15,11 @@ import java.time.LocalDateTime;
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, allowGetters = true)
 @EntityListeners(AuditingEntityListener.class)
 public abstract class AuditModel implements Serializable {
-    @NotBlank
+    @NotNull
     @CreatedDate
     private LocalDateTime createdAt;
 
-    @NotBlank
+    @NotNull
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
