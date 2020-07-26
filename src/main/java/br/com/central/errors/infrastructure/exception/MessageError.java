@@ -1,4 +1,4 @@
-package br.com.central.errors.message;
+package br.com.central.errors.infrastructure.exception;
 
 import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
