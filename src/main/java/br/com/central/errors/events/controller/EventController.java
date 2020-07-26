@@ -1,6 +1,8 @@
 package br.com.central.errors.events.controller;
 
 import br.com.central.errors.events.entity.Event;
+import br.com.central.errors.events.entity.dto.EventResponse;
+import br.com.central.errors.events.mappers.EventMapper;
 import br.com.central.errors.events.service.EventService;
 import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
@@ -15,20 +17,22 @@ import java.util.List;
 public class EventController {
 
     private EventService service;
+    private EventMapper mapper;
 
-    public EventController(EventService service) {
+    public EventController(EventService service, EventMapper mapper) {
         this.service = service;
+        this.mapper = mapper;
     }
 
     @GetMapping
-    public ResponseEntity<List<Event>> findAll() {
-        return ResponseEntity.ok(service.findAll());
+    public ResponseEntity<List<EventResponse>> findAll() {
+        return ResponseEntity.ok(mapper.map(service.findAll()));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Event> findById(@PathVariable("id") Long id) {
+    public ResponseEntity<EventResponse> findById(@PathVariable("id") Long id) {
         return ResponseEntity.ok()
-                .body(service.findById(id));
+                .body(mapper.map(service.findById(id)));
     }
 
 
