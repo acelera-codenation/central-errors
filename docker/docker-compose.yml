@@ -9,8 +9,8 @@ services:
       - database.env
     volumes:
       - database-data:/var/lib/postgresql/data/
-#  controle-patrimonial:
-#    container_name: controle-patrimonial
+#  central-errors:
+#    container_name: central-errors
 #    build:
 #      context: ../
 #      args:
