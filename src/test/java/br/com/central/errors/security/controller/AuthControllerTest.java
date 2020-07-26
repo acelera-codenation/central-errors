@@ -1,8 +1,8 @@
 package br.com.central.errors.security.controller;
 
-import br.com.central.errors.security.dto.JwtResponseDTO;
-import br.com.central.errors.security.dto.SignInDTO;
-import br.com.central.errors.security.dto.SignUpDTO;
+import br.com.central.errors.security.entity.dto.JwtResponse;
+import br.com.central.errors.security.entity.dto.SignIn;
+import br.com.central.errors.security.entity.dto.SignUp;
 import br.com.central.errors.security.repository.UserRepository;
 import br.com.central.errors.security.service.JwtService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -45,17 +45,17 @@ class AuthControllerTest {
     @Autowired
     private JwtService jwtService;
 
-    private SignUpDTO user;
-    private SignInDTO login;
+    private SignUp user;
+    private SignIn login;
 
     @BeforeEach
     void setUp() {
-        this.user = new SignUpDTO();
+        this.user = new SignUp();
         user.setUsername("adm");
         user.setEmail("samuel@teste.com");
         user.setPassword("1234556");
 
-        this.login = new SignInDTO();
+        this.login = new SignIn();
         login.setUsername(user.getUsername());
         login.setPassword(user.getPassword());
     }
@@ -172,7 +172,7 @@ class AuthControllerTest {
                 .andExpect(status().is4xxClientError());
     }
 
-    private String obtainAccessToken(SignUpDTO userToken) throws Exception {
+    private String obtainAccessToken(SignUp userToken) throws Exception {
 
         login.setUsername(userToken.getUsername());
         mockMvc.perform(post("/auth/signup")
@@ -188,7 +188,7 @@ class AuthControllerTest {
                 .andReturn();
 
         String contentAsString = result.getResponse().getContentAsString();
-        JwtResponseDTO jwt = objectMapper.readValue(contentAsString, JwtResponseDTO.class);
+        JwtResponse jwt = objectMapper.readValue(contentAsString, JwtResponse.class);
 
         return jwt.getToken();
     }

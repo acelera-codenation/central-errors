@@ -1,4 +1,4 @@
-package br.com.central.errors.security.dto;
+package br.com.central.errors.security.entity.dto;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @ApiModel(value = "Response Acess Bearer Token", description = "Response Acess Bearer Token")
-public class JwtResponseDTO {
+public class JwtResponse {
     private String token;
     private String type = "Bearer";
     private Long id;
@@ -25,7 +25,7 @@ public class JwtResponseDTO {
      * @param username the username
      * @param email    the email
      */
-    public JwtResponseDTO(String jwt, Long id, String username, String email) {
+    public JwtResponse(String jwt, Long id, String username, String email) {
         this.token = jwt;
         this.id = id;
         this.username = username;

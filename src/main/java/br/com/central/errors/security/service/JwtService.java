@@ -1,7 +1,9 @@
 package br.com.central.errors.security.service;
 
 import br.com.central.errors.security.entity.UserDetailsCustom;
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

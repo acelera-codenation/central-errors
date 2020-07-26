@@ -1,4 +1,4 @@
-package br.com.central.errors.security.dto;
+package br.com.central.errors.security.entity.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -14,7 +14,7 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 @ApiModel(value = "Login", description = "Login")
-public class SignInDTO {
+public class SignIn {
 
     @NotBlank(message = "{sign.username.not_blank}")
     @ApiModelProperty(required = true)

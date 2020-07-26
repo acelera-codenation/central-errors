@@ -1,9 +1,9 @@
 package br.com.central.errors.security.service;
 
-import br.com.central.errors.security.entity.UserDetailsCustom;
-import br.com.central.errors.security.repository.UserRepository;
 import br.com.central.errors.infrastructure.translate.CustomTranslator;
 import br.com.central.errors.security.entity.User;
+import br.com.central.errors.security.entity.UserDetailsCustom;
+import br.com.central.errors.security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -1,4 +1,4 @@
-package br.com.central.errors.security.dto;
+package br.com.central.errors.security.entity.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @ApiModel(value = "SignUp", description = "SignUp")
-public class SignUpDTO {
+public class SignUp {
     @NotBlank(message = "{sign.username.not_blank}")
     @Size(min = 3, max = 20, message = "{sign.username.size}")
     @ApiModelProperty(required = true)
