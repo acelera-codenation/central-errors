@@ -2,6 +2,7 @@ package br.com.central.errors.security.entity.dto;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -9,6 +10,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@NoArgsConstructor
 @ApiModel(value = "Response Acess Bearer Token", description = "Response Acess Bearer Token")
 public class JwtResponse {
     private String token;
