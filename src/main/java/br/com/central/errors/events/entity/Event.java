@@ -23,7 +23,8 @@ public class Event {
 
     @NotNull
     @Column(name = "level_error")
-    private Integer level;
+    @Enumerated(EnumType.STRING)
+    private Level level;
 
     @NotNull
     private String description;

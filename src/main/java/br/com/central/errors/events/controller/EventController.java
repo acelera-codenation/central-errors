@@ -5,6 +5,7 @@ import br.com.central.errors.events.entity.dto.EventResponse;
 import br.com.central.errors.events.mappers.EventMapper;
 import br.com.central.errors.events.service.EventService;
 import io.swagger.annotations.Api;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +36,15 @@ public class EventController {
                 .body(mapper.map(service.findById(id)));
     }
 
+    @PostMapping
+    public ResponseEntity<EventResponse> save(@RequestBody Event event) {
+        Event update = service.save(event);
+        return new ResponseEntity<EventResponse>(mapper.map(update), HttpStatus.CREATED);
+    }
 
-
+    @PutMapping("/{id}")
+    public ResponseEntity<EventResponse> update(@RequestBody Event event) {
+        Event update = service.save(event);
+        return new ResponseEntity<EventResponse>(mapper.map(update), HttpStatus.CREATED);
+    }
 }

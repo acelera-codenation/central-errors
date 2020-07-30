@@ -1,5 +1,6 @@
 package br.com.central.errors.events.entity.dto;
 
+import br.com.central.errors.events.entity.Level;
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 @ApiModel(value = "EventResponse")
 public class EventResponse {
     private Long id;
-    private Integer level;
+    private Level level;
     private String description;
     private String origin;
     private LocalDateTime date;
