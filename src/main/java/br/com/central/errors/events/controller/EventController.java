@@ -43,8 +43,8 @@ public class EventController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<EventResponse> update(@RequestBody Event event) {
+    public ResponseEntity<EventResponse> update(@PathVariable("id") Long id, @RequestBody Event event) {
         Event update = service.save(event);
-        return new ResponseEntity<EventResponse>(mapper.map(update), HttpStatus.CREATED);
+        return new ResponseEntity<EventResponse>(mapper.map(update), HttpStatus.OK);
     }
 }

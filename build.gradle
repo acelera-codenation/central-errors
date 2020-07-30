@@ -73,8 +73,6 @@ dependencies {
 			'com.h2database:h2',
 			'org.springframework.security:spring-security-test'
 	)
-
-
 }
 
 test {
