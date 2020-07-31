@@ -104,6 +104,6 @@ sonarqube {
         property "sonar.java.coveragePlugin", "jacoco"
         property "sonar.host.url", "https://sonarcloud.io"
         property "sonar.login", System.getenv("SONAR_TOKEN")
-        property 'sonar.exclusions', "src/java/test/**"
+        property 'sonar.exclusions', "src/test/**"
     }
 }

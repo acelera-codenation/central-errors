@@ -11,6 +11,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MvcResult;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -80,14 +81,15 @@ class AuthControllerTest extends AbstractTest {
         assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
 
         result = signIn(login);
-        status().is4xxClientError().match(result);
+        assertTrue( HttpStatus.valueOf(result.getResponse().getStatus()).is4xxClientError());
     }
 
     @Test
     void whenNotLoggedBadCredentials() throws Exception {
         SignIn login = login();
         login.setUsername("credentials");
-        status().is4xxClientError().match(signIn(login));
+        MvcResult result = signIn(login);
+        assertTrue( HttpStatus.valueOf(result.getResponse().getStatus()).is4xxClientError());
     }
 
     @Test
