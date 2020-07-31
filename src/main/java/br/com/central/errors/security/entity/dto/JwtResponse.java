@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@ApiModel(value = "Response Acess Bearer Token", description = "Response Acess Bearer Token")
+@ApiModel(value = "Response Access Bearer Token", description = "Response Access Bearer Token")
 public class JwtResponse {
     private String token;
     private String type = "Bearer";

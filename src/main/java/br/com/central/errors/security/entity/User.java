@@ -50,4 +50,8 @@ public class User extends AuditModel {
         this.email = email;
         this.password = password;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    };
 }

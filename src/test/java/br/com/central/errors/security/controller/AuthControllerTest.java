@@ -3,15 +3,10 @@ package br.com.central.errors.security.controller;
 import br.com.central.errors.App;
 import br.com.central.errors.security.entity.dto.SignIn;
 import br.com.central.errors.security.entity.dto.SignUp;
-import br.com.central.errors.security.repository.UserRepository;
-import br.com.central.errors.security.service.JwtService;
 import br.com.central.errors.suite.AbstractTest;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MvcResult;
 
@@ -23,26 +18,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Sql("/pre-sql.sql")
 class AuthControllerTest extends AbstractTest {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder encoder;
-
-    @Autowired
-    private JwtService jwtService;
-
     @Test
-    void signInOk() throws Exception {
+    void whenLoginOk() throws Exception {
         MvcResult result = signUp(user());
         assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
     }
 
     @Test
-    void signUpOK() throws Exception {
+    void whenRegisterOk() throws Exception {
         SignUp user = user();
         SignIn login = login();
 
@@ -58,7 +41,7 @@ class AuthControllerTest extends AbstractTest {
     }
 
     @Test
-    void signUpBadRequestInvalidUserName() throws Exception {
+    void whenRegisterInvalidUser() throws Exception {
         SignUp user = user();
         user.setUsername("");
         MvcResult result = signUp(user);
@@ -66,16 +49,16 @@ class AuthControllerTest extends AbstractTest {
     }
 
     @Test
-    void signUpBadRequestInvalidEmail() throws Exception {
+    void whenRegisterInvalidEmail() throws Exception {
         SignUp user = user();
-        user.setEmail("invalido");
+        user.setEmail("invalid");
 
         MvcResult result = signUp(user);
         assertEquals(HttpStatus.BAD_REQUEST.value(), result.getResponse().getStatus());
     }
 
     @Test
-    void signUpBadRequestInvalidPassword() throws Exception {
+    void whenRegisterInvalidPassword() throws Exception {
         SignUp user = user();
         user.setPassword("123");
 
@@ -84,7 +67,7 @@ class AuthControllerTest extends AbstractTest {
     }
 
     @Test
-    void signInInvalidUser() throws Exception {
+    void whenNotLoggedInvalidUser() throws Exception {
 
         SignUp user = user();
         SignIn login = login();
@@ -101,23 +84,23 @@ class AuthControllerTest extends AbstractTest {
     }
 
     @Test
-    void signInBadCredentials() throws Exception {
+    void whenNotLoggedBadCredentials() throws Exception {
         SignIn login = login();
-        login.setUsername("badcredentials");
+        login.setUsername("credentials");
         status().is4xxClientError().match(signIn(login));
     }
 
     @Test
-    void invalidAccess() throws Exception {
+    void whenNotLogged() throws Exception {
         mvc.perform(get("/api/events"))
                 .andExpect(status().is4xxClientError());
     }
 
     @Test
-    void validAccess() throws Exception {
+    void whenLoggedInEvents() throws Exception {
         SignUp user = user();
-        user.setEmail("teste1@teste.com");
-        user.setUsername("teste1");
+        user.setEmail("test1@teste.com");
+        user.setUsername("test1");
 
         mvc.perform(get("/api/events")
                 .header("Authorization", getBearerToken(user)))
@@ -125,7 +108,7 @@ class AuthControllerTest extends AbstractTest {
     }
 
     @Test
-    void invalidAccessToken() throws Exception {
+    void whenNotLoggedInInvalidAccessToken() throws Exception {
         SignUp user = user();
         user.setEmail("invalidaccesstoken@teste.com");
         user.setUsername("invalidAccessToken");

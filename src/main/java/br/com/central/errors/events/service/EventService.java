@@ -31,5 +31,10 @@ public class EventService implements EventServiceInterface {
     public <S extends Event> S save(S event) {
         return repository.save(event);
     }
-    
+
+    @Override
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
+
 }

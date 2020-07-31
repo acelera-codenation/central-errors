@@ -42,4 +42,5 @@ public class Event {
 
     @NotNull
     private Integer quantity;
+
 }

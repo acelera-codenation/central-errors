@@ -28,8 +28,9 @@ public class CustomResponseExceptionHandle {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ResponseEntity<String> credentialsException(BadCredentialsException e) {
 
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(CustomTranslator.toLocale("user.auth" +
-                ".unauthorized_user"));
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(CustomTranslator.toLocale("user.auth.unauthorized_user"));
     }
 
 }
