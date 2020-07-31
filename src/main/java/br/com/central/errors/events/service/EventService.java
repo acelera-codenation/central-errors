@@ -19,7 +19,7 @@ public class EventService implements EventServiceInterface {
 
     @Override
     public Event findById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException());
+        return repository.findById(id).orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override

@@ -44,13 +44,13 @@ public class EventController {
     @PostMapping
     public ResponseEntity<EventResponse> save(@RequestBody Event event) {
         Event update = service.save(event);
-        return new ResponseEntity<EventResponse>(mapper.map(update), HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(mapper.map(update));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<EventResponse> update(@PathVariable("id") Long id, @Valid @RequestBody Event event) {
         Event update = service.save(event);
-        return new ResponseEntity<EventResponse>(mapper.map(update), HttpStatus.OK);
+        return ResponseEntity.ok(mapper.map(update));
     }
 
     @DeleteMapping("/{id}")

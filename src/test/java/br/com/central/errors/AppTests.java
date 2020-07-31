@@ -11,9 +11,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ActiveProfiles("test")
 class AppTests {
 
-	@Test
-	void contextLoads() {
-		assert true;
-	}
+    @Test
+    void contextLoads() {
+        assert true;
+    }
 
 }

@@ -6,7 +6,10 @@ import java.util.List;
 
 public interface EventServiceInterface {
     Event findById(Long id);
+
     List<Event> findAll();
+
     <S extends Event> S save(S event);
+
     void delete(Long id);
 }

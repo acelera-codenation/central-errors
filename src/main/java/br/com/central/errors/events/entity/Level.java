@@ -8,15 +8,15 @@ import java.util.stream.Stream;
 public enum Level {
     ERROR("ERROR"), WARNING("WARNING"), INFO("INFO");
 
-    private String level;
+    private String name;
 
-    Level(String level) {
-        this.level = level;
+    Level(String name) {
+        this.name = name;
     }
 
     public static Level of(String level) {
         return Stream.of(Level.values())
-                .filter(p -> p.getLevel() == level)
+                .filter(p -> p.getName() == level)
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
     }

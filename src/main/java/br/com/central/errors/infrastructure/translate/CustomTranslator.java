@@ -12,7 +12,7 @@ public class CustomTranslator {
 
     @Autowired
     CustomTranslator(MessageSource msg) {
-        messageSource = msg;
+        CustomTranslator.messageSource = msg;
     }
 
     public static String toLocale(String msg) {
