@@ -4,7 +4,9 @@ import br.com.central.errors.events.entity.Event;
 import br.com.central.errors.events.entity.dto.EventResponse;
 import br.com.central.errors.events.mappers.EventMapper;
 import br.com.central.errors.events.service.EventService;
+import com.querydsl.core.types.Predicate;
 import io.swagger.annotations.Api;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,15 +27,22 @@ public class EventController {
         this.mapper = mapper;
     }
 
-    @GetMapping
-    public ResponseEntity<List<EventResponse>> findAll() {
-        return ResponseEntity.ok(mapper.map(service.findAll()));
-    }
+//    @GetMapping
+//    public ResponseEntity<List<EventResponse>> findAll() {
+//        return ResponseEntity.ok(mapper.map(service.findAll()));
+//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<EventResponse> findById(@PathVariable("id") Long id) {
         return ResponseEntity.ok()
                 .body(mapper.map(service.findById(id)));
+    }
+
+    @GetMapping
+    @ResponseBody
+    public Iterable<Event> findAllByWebQuerydsl(
+            @QuerydslPredicate(root = Event.class) Predicate predicate) {
+        return service.findAll(predicate);
     }
 
     @PostMapping

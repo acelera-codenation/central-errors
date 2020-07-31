@@ -3,6 +3,7 @@ package br.com.central.errors.events.service;
 import br.com.central.errors.events.entity.Event;
 import br.com.central.errors.events.repository.EventRepository;
 import br.com.central.errors.events.service.interfaces.EventServiceInterface;
+import com.querydsl.core.types.Predicate;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -31,5 +32,10 @@ public class EventService implements EventServiceInterface {
     public <S extends Event> S save(S event) {
         return repository.save(event);
     }
-    
+
+    @Override
+    public Iterable<Event> findAll(Predicate predicate) {
+        return repository.findAll(predicate);
+    }
+
 }
