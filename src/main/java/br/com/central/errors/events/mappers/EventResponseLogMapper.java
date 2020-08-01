@@ -6,8 +6,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface EventLogMapper {
-
+public interface EventResponseLogMapper {
     @Mapping(source = "id", target = "id")
     @Mapping(source = "level", target = "level")
     @Mapping(source = "description", target = "description")

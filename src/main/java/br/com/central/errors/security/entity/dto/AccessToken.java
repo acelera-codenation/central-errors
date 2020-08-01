@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @ApiModel(value = "Response Access Bearer Token", description = "Response Access Bearer Token")
-public class JwtResponse {
+public class AccessToken {
     private String token;
     private String type = "Bearer";
     private Long id;
@@ -27,7 +27,7 @@ public class JwtResponse {
      * @param username the username
      * @param email    the email
      */
-    public JwtResponse(String jwt, Long id, String username, String email) {
+    public AccessToken(String jwt, Long id, String username, String email) {
         this.token = jwt;
         this.id = id;
         this.username = username;

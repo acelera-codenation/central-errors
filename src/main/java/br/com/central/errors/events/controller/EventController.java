@@ -2,8 +2,9 @@ package br.com.central.errors.events.controller;
 
 import br.com.central.errors.events.entity.Event;
 import br.com.central.errors.events.entity.dto.EventLogResponse;
+import br.com.central.errors.events.entity.dto.EventRequest;
 import br.com.central.errors.events.entity.dto.EventResponse;
-import br.com.central.errors.events.mappers.EventLogMapper;
+import br.com.central.errors.events.mappers.EventResponseLogMapper;
 import br.com.central.errors.events.mappers.EventMapper;
 import br.com.central.errors.events.service.EventService;
 import io.swagger.annotations.Api;
@@ -22,9 +23,9 @@ public class EventController {
 
     private EventService service;
     private EventMapper mapper;
-    private EventLogMapper mapperLog;
+    private EventResponseLogMapper mapperLog;
 
-    public EventController(EventService service, EventMapper mapper, EventLogMapper mapperLog) {
+    public EventController(EventService service, EventMapper mapper, EventResponseLogMapper mapperLog) {
         this.service = service;
         this.mapper = mapper;
         this.mapperLog = mapperLog;
@@ -42,21 +43,30 @@ public class EventController {
     }
 
     @PostMapping
-    public ResponseEntity<EventLogResponse> save(@RequestBody Event event) {
+    public ResponseEntity<EventLogResponse> save(@Valid @RequestBody EventRequest request) {
+
+        Event event = new Event();
+        event.setLevel(request.getLevel());
+        event.setOrigin(request.getOrigin());
+        event.setDescription(request.getDescription());
+        event.setLog(request.getLog());
+        event.setDate(request.getDate());
+        event.setQuantity(request.getQuantity());
+
         Event update = service.save(event);
         return ResponseEntity.status(HttpStatus.CREATED).body(mapperLog.map(update));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<EventResponse> update(@PathVariable("id") Long id, @Valid @RequestBody Event content) {
+    public ResponseEntity<EventResponse> update(@PathVariable("id") Long id, @Valid @RequestBody EventRequest request) {
 
         Event event = service.findById(id);
-        event.setLevel(content.getLevel());
-        event.setOrigin(content.getOrigin());
-        event.setDescription(content.getDescription());
-        event.setLog(content.getLog());
-        event.setDate(content.getDate());
-        event.setQuantity(content.getQuantity());
+        event.setLevel(request.getLevel());
+        event.setOrigin(request.getOrigin());
+        event.setDescription(request.getDescription());
+        event.setLog(request.getLog());
+        event.setDate(request.getDate());
+        event.setQuantity(request.getQuantity());
 
         Event update = service.save(event);
         return ResponseEntity.ok(mapper.map(update));

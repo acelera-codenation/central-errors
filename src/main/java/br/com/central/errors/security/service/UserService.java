@@ -3,7 +3,7 @@ package br.com.central.errors.security.service;
 import br.com.central.errors.infrastructure.translate.CustomTranslator;
 import br.com.central.errors.security.entity.User;
 import br.com.central.errors.security.entity.UserDetailsCustom;
-import br.com.central.errors.security.entity.dto.JwtResponse;
+import br.com.central.errors.security.entity.dto.AccessToken;
 import br.com.central.errors.security.entity.dto.ResetPassword;
 import br.com.central.errors.security.exceptions.PasswordMatchException;
 import br.com.central.errors.security.repository.UserRepository;
@@ -64,7 +64,7 @@ public class UserService implements UserDetailsService, UserInterface {
     }
 
     @Override
-    public JwtResponse login(Object principal, Object credentials) {
+    public AccessToken login(Object principal, Object credentials) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(principal, credentials));
 
@@ -72,7 +72,7 @@ public class UserService implements UserDetailsService, UserInterface {
         String jwt = jwtService.generateJwtToken(authentication);
         UserDetailsCustom userDetailsCustom = (UserDetailsCustom) authentication.getPrincipal();
 
-        return new JwtResponse(jwt,
+        return new AccessToken(jwt,
                 userDetailsCustom.getId(),
                 userDetailsCustom.getUsername(),
                 userDetailsCustom.getEmail());

@@ -2,10 +2,8 @@ package br.com.central.errors.security.service.interfaces;
 
 
 import br.com.central.errors.security.entity.User;
-import br.com.central.errors.security.entity.dto.JwtResponse;
+import br.com.central.errors.security.entity.dto.AccessToken;
 import br.com.central.errors.security.entity.dto.ResetPassword;
-
-import java.util.Optional;
 
 public interface UserInterface {
 
@@ -15,7 +13,7 @@ public interface UserInterface {
 
     boolean existsByEmail(String email);
 
-    JwtResponse login(Object principal, Object credentials);
+    AccessToken login(Object principal, Object credentials);
 
     void changeUserPassword(final ResetPassword user);
 

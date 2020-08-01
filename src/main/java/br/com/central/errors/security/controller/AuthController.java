@@ -1,6 +1,6 @@
 package br.com.central.errors.security.controller;
 
-import br.com.central.errors.security.entity.dto.JwtResponse;
+import br.com.central.errors.security.entity.dto.AccessToken;
 import br.com.central.errors.security.entity.dto.SignIn;
 import br.com.central.errors.security.service.UserService;
 import io.swagger.annotations.Api;
@@ -32,7 +32,7 @@ public class AuthController {
      * @return the response entity
      */
     @PostMapping("/login")
-    public ResponseEntity<JwtResponse> login(@Valid @RequestBody SignIn signIn) {
+    public ResponseEntity<AccessToken> login(@Valid @RequestBody SignIn signIn) {
         return ResponseEntity.ok(service.login(signIn.getUsername(), signIn.getPassword()));
     }
 

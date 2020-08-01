@@ -1,12 +1,12 @@
 package br.com.central.errors.events.controller;
 
 import br.com.central.errors.App;
-import br.com.central.errors.events.entity.Event;
 import br.com.central.errors.events.entity.Level;
 import br.com.central.errors.events.entity.dto.EventLogResponse;
-import br.com.central.errors.events.entity.dto.EventResponse;
+import br.com.central.errors.events.entity.dto.EventRequest;
 import br.com.central.errors.security.entity.dto.SignUp;
 import br.com.central.errors.suite.AbstractTest;
+import io.micrometer.core.ipc.http.HttpSender;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -26,15 +26,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Sql("/pre-sql.sql")
 class EventControllerTest extends AbstractTest {
 
-    private Event getEvent() {
-        Event event = new Event();
-        event.setDate(LocalDateTime.now());
-        event.setDescription("Teste");
-        event.setLevel(Level.ERROR);
-        event.setLog("Log teste whenSaveEvent");
-        event.setQuantity(1);
-        event.setOrigin("Testes");
-        return event;
+    private EventRequest getEvent() {
+        EventRequest request = new EventRequest();
+        request.setDate(LocalDateTime.now());
+        request.setDescription("Teste");
+        request.setLevel(Level.ERROR);
+        request.setLog("Log teste whenSaveEvent");
+        request.setQuantity(1);
+        request.setOrigin("Testes");
+        return request;
     }
 
     private String getAuthToken() throws Exception {
@@ -62,9 +62,7 @@ class EventControllerTest extends AbstractTest {
                 .header("Authorization", getAuthToken()))
                 .andExpect(status().isOk());
 
-        EventLogResponse event = getContentEventLogResponse(result.andReturn());
-
-        assertTrue(event instanceof EventLogResponse);
+        assertNotNull(getContentEventLogResponse(result.andReturn()));
     }
 
     @Test
@@ -90,18 +88,23 @@ class EventControllerTest extends AbstractTest {
     void whenUpdateEvent() throws Exception {
         String token = getAuthToken();
 
-        MvcResult result = mvc.perform(post("/api/events").content(mapToJson(getEvent()))
+        EventRequest request = getEvent();
+
+        MvcResult result = mvc.perform(post("/api/events")
+                .content(mapToJson(request))
                 .header("Authorization", token)
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isCreated()).andReturn();
+                .andExpect(status().isCreated())
+                .andReturn();
 
         EventLogResponse eventSaved = getContentEventLogResponse(result);
         assertNotNull(eventSaved.getId());
-
         eventSaved.setLevel(Level.WARNING);
 
+        request.setDescription("Changes");
+
         mvc.perform(put("/api/events/" + eventSaved.getId())
-                .content(mapToJson(eventSaved))
+                .content(mapToJson(request))
                 .header("Authorization", token)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());

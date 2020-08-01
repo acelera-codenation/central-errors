@@ -1,6 +1,6 @@
 package br.com.central.errors.suite;
 
-import br.com.central.errors.security.entity.dto.JwtResponse;
+import br.com.central.errors.security.entity.dto.AccessToken;
 import br.com.central.errors.security.entity.dto.SignIn;
 import br.com.central.errors.security.entity.dto.SignUp;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public abstract class AbstractTest {
 
     public static final String USERNAME = "adm";
-    public static final String PASSWORD = "1234556";
+    public static final String PASSWORD = "123456";
     public static final String EMAIL = "samuel@teste.com";
     public static final String AUTH_SIGN_IN = "/auth/login";
     public static final String USER_REGISTER = "/user/register";
@@ -73,7 +73,7 @@ public abstract class AbstractTest {
         status().isOk().match(result);
 
         String content = result.getResponse().getContentAsString();
-        JwtResponse jwt = JsonToMap(content, JwtResponse.class);
+        AccessToken jwt = JsonToMap(content, AccessToken.class);
 
         return "Bearer " + jwt.getToken();
     }
