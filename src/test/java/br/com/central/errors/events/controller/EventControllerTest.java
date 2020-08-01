@@ -6,7 +6,6 @@ import br.com.central.errors.events.entity.dto.EventLogResponse;
 import br.com.central.errors.events.entity.dto.EventRequest;
 import br.com.central.errors.security.entity.dto.SignUp;
 import br.com.central.errors.suite.AbstractTest;
-import io.micrometer.core.ipc.http.HttpSender;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -18,7 +17,6 @@ import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -103,11 +101,11 @@ class EventControllerTest extends AbstractTest {
 
         request.setDescription("Changes");
 
-        mvc.perform(put("/api/events/" + eventSaved.getId())
+        mvc.perform(patch("/api/events/" + eventSaved.getId())
                 .content(mapToJson(request))
                 .header("Authorization", token)
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isAccepted());
     }
 
     @Test

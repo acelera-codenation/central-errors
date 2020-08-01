@@ -4,8 +4,9 @@ import br.com.central.errors.events.entity.Event;
 import br.com.central.errors.events.entity.dto.EventLogResponse;
 import br.com.central.errors.events.entity.dto.EventRequest;
 import br.com.central.errors.events.entity.dto.EventResponse;
-import br.com.central.errors.events.mappers.EventResponseLogMapper;
 import br.com.central.errors.events.mappers.EventMapper;
+import br.com.central.errors.events.mappers.EventMapperWithLog;
+import br.com.central.errors.events.mappers.EventRequestMapper;
 import br.com.central.errors.events.service.EventService;
 import io.swagger.annotations.Api;
 import org.springframework.http.HttpStatus;
@@ -23,12 +24,14 @@ public class EventController {
 
     private EventService service;
     private EventMapper mapper;
-    private EventResponseLogMapper mapperLog;
+    private EventMapperWithLog mapperLog;
+    private EventRequestMapper mapperRequest;
 
-    public EventController(EventService service, EventMapper mapper, EventResponseLogMapper mapperLog) {
+    public EventController(EventService service, EventMapper mapper, EventMapperWithLog mapperLog, EventRequestMapper mapperRequest) {
         this.service = service;
         this.mapper = mapper;
         this.mapperLog = mapperLog;
+        this.mapperRequest = mapperRequest;
     }
 
     @GetMapping
@@ -44,32 +47,14 @@ public class EventController {
 
     @PostMapping
     public ResponseEntity<EventLogResponse> save(@Valid @RequestBody EventRequest request) {
-
-        Event event = new Event();
-        event.setLevel(request.getLevel());
-        event.setOrigin(request.getOrigin());
-        event.setDescription(request.getDescription());
-        event.setLog(request.getLog());
-        event.setDate(request.getDate());
-        event.setQuantity(request.getQuantity());
-
-        Event update = service.save(event);
+        Event update = service.save(mapperRequest.map(request));
         return ResponseEntity.status(HttpStatus.CREATED).body(mapperLog.map(update));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<EventResponse> update(@PathVariable("id") Long id, @Valid @RequestBody EventRequest request) {
-
-        Event event = service.findById(id);
-        event.setLevel(request.getLevel());
-        event.setOrigin(request.getOrigin());
-        event.setDescription(request.getDescription());
-        event.setLog(request.getLog());
-        event.setDate(request.getDate());
-        event.setQuantity(request.getQuantity());
-
-        Event update = service.save(event);
-        return ResponseEntity.ok(mapper.map(update));
+    @PatchMapping("/{id}")
+    public ResponseEntity<EventResponse> update(@PathVariable("id") Long id,@RequestBody EventRequest request) {
+        Event update = service.save(mapperRequest.updateEvent(request, service.findById(id)));
+        return ResponseEntity.accepted().body(mapperLog.map(update));
     }
 
     @DeleteMapping("/{id}")
