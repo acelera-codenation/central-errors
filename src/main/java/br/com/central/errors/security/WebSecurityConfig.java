@@ -70,7 +70,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/csrf",
                         "/webjars/**",
                         "/actuator/**",
-                        "/auth/**").permitAll()
+                        "/auth/**",
+                        "/user/register").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

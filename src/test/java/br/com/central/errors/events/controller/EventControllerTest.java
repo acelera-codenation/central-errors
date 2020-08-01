@@ -14,6 +14,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -36,82 +37,100 @@ class EventControllerTest extends AbstractTest {
         return event;
     }
 
+    private String getAuthToken() throws Exception {
+        SignUp user = user();
+        user.setEmail("usertest@teste.com");
+        user.setUsername("usertest");
+        return getBearerToken(user);
+    }
+
+    private EventLogResponse getContentEventLogResponse(MvcResult result) throws UnsupportedEncodingException, com.fasterxml.jackson.core.JsonProcessingException {
+        String response = result.getResponse().getContentAsString();
+        return JsonToMap(response, EventLogResponse.class);
+    }
+
     @Test
     void whenFindAllEvents() throws Exception {
-        SignUp user = user();
-        user.setEmail("findallok@teste.com");
-        user.setUsername("findallok");
-
         mvc.perform(get("/api/events")
-                .header("Authorization", getBearerToken(user)))
+                .header("Authorization", getAuthToken()))
                 .andExpect(status().isOk());
     }
 
     @Test
     void whenFindEventById() throws Exception {
-        SignUp user = user();
-        user.setEmail("findallok@teste.com");
-        user.setUsername("findallok");
-
         ResultActions result = mvc.perform(get("/api/events/1")
-                .header("Authorization", getBearerToken(user)))
+                .header("Authorization", getAuthToken()))
                 .andExpect(status().isOk());
 
-        String content = result.andReturn().getResponse().getContentAsString();
-        EventLogResponse event = JsonToMap(content, EventLogResponse.class);
+        EventLogResponse event = getContentEventLogResponse(result.andReturn());
 
         assertTrue(event instanceof EventLogResponse);
     }
 
     @Test
     void whenFindByIdReturnError() throws Exception {
-
-        SignUp user = user();
-        user.setEmail("findoneerror@teste.com");
-        user.setUsername("findoneerror");
-
         mvc.perform(get("/api/events/3")
-                .header("Authorization", getBearerToken(user)))
+                .header("Authorization", getAuthToken()))
                 .andExpect(status().is4xxClientError());
     }
 
     @Test
     void whenSaveEvent() throws Exception {
-        SignUp user = user();
-        user.setEmail("whenSaveEvent@teste.com");
-        user.setUsername("whenSaveEvent");
-
         MvcResult result = mvc.perform(post("/api/events").content(mapToJson(getEvent()))
-                .header("Authorization", getBearerToken(user))
+                .header("Authorization", getAuthToken())
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated()).andReturn();
 
-        String response = result.getResponse().getContentAsString();
-        EventResponse eventSaved = JsonToMap(response, EventResponse.class);
+        EventLogResponse eventSaved = getContentEventLogResponse(result);
 
         assertNotNull(eventSaved.getId());
     }
 
     @Test
-    void whenDeleteEvent() throws Exception {
-        SignUp user = user();
-        user.setEmail("whenDeleteEvent@teste.com");
-        user.setUsername("whenDeleteEvent");
-
-        String token = getBearerToken(user);
+    void whenUpdateEvent() throws Exception {
+        String token = getAuthToken();
 
         MvcResult result = mvc.perform(post("/api/events").content(mapToJson(getEvent()))
                 .header("Authorization", token)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated()).andReturn();
 
-        String response = result.getResponse().getContentAsString();
-        EventResponse eventSaved = JsonToMap(response, EventResponse.class);
+        EventLogResponse eventSaved = getContentEventLogResponse(result);
+        assertNotNull(eventSaved.getId());
+
+        eventSaved.setLevel(Level.WARNING);
+
+        mvc.perform(put("/api/events/" + eventSaved.getId())
+                .content(mapToJson(eventSaved))
+                .header("Authorization", token)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void whenDeleteEvent() throws Exception {
+        String token = getAuthToken();
+
+        MvcResult result = mvc.perform(post("/api/events").content(mapToJson(getEvent()))
+                .header("Authorization", token)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated()).andReturn();
+
+        EventLogResponse eventSaved = getContentEventLogResponse(result);
 
         assertNotNull(eventSaved.getId());
 
         mvc.perform(delete("/api/events/" + eventSaved.getId())
                 .header("Authorization", token))
                 .andExpect(status().isAccepted());
+    }
+
+    @Test
+    void whenDeleteEventNotFound() throws Exception {
+        String token = getAuthToken();
+
+        mvc.perform(delete("/api/events/-1")
+                .header("Authorization", token))
+                .andExpect(status().isNotFound());
     }
 }

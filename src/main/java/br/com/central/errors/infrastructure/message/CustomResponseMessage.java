@@ -1,4 +1,4 @@
-package br.com.central.errors.infrastructure.exception;
+package br.com.central.errors.infrastructure.message;
 
 import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
@@ -12,6 +12,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @ApiModel(value = "Message")
-public class MessageError {
+public class CustomResponseMessage {
     private String message;
 }

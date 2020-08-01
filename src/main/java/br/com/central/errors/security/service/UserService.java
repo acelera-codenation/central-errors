@@ -4,8 +4,11 @@ import br.com.central.errors.infrastructure.translate.CustomTranslator;
 import br.com.central.errors.security.entity.User;
 import br.com.central.errors.security.entity.UserDetailsCustom;
 import br.com.central.errors.security.entity.dto.JwtResponse;
+import br.com.central.errors.security.entity.dto.ResetPassword;
+import br.com.central.errors.security.exceptions.PasswordMatchException;
 import br.com.central.errors.security.repository.UserRepository;
 import br.com.central.errors.security.service.interfaces.UserInterface;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -75,4 +78,21 @@ public class UserService implements UserDetailsService, UserInterface {
                 userDetailsCustom.getEmail());
 
     }
+
+    @Override
+    public void changeUserPassword(ResetPassword account) {
+
+        if (account.getNewPassword().compareTo(account.getConfirmPassword()) != 0) {
+            throw new PasswordMatchException("user.password_wrong");
+        }
+
+        User user = repository.findByUsername(account.getUsername()).orElseThrow(ResourceNotFoundException::new);
+
+        if (!encoder.matches(account.getPassword(), user.getPassword())) throw new PasswordMatchException("user.password_wrong");
+
+        user.setPassword(encoder.encode(account.getNewPassword()));
+
+        repository.save(user);
+    }
+
 }

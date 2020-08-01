@@ -42,22 +42,30 @@ public class EventController {
     }
 
     @PostMapping
-    public ResponseEntity<EventResponse> save(@RequestBody Event event) {
+    public ResponseEntity<EventLogResponse> save(@RequestBody Event event) {
         Event update = service.save(event);
-        return ResponseEntity.status(HttpStatus.CREATED).body(mapper.map(update));
+        return ResponseEntity.status(HttpStatus.CREATED).body(mapperLog.map(update));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<EventResponse> update(@PathVariable("id") Long id, @Valid @RequestBody Event event) {
+    public ResponseEntity<EventResponse> update(@PathVariable("id") Long id, @Valid @RequestBody Event content) {
+
+        Event event = service.findById(id);
+        event.setLevel(content.getLevel());
+        event.setOrigin(content.getOrigin());
+        event.setDescription(content.getDescription());
+        event.setLog(content.getLog());
+        event.setDate(content.getDate());
+        event.setQuantity(content.getQuantity());
+
         Event update = service.save(event);
         return ResponseEntity.ok(mapper.map(update));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable Long id) {
-        if (service.findById(id) != null) {
-            service.delete(id);
-            return ResponseEntity.accepted().build();
-        } else return ResponseEntity.notFound().build();
+        service.findById(id);
+        service.delete(id);
+        return ResponseEntity.accepted().build();
     }
 }

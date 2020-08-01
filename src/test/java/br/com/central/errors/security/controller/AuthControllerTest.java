@@ -26,48 +26,6 @@ class AuthControllerTest extends AbstractTest {
     }
 
     @Test
-    void whenRegisterOk() throws Exception {
-        SignUp user = user();
-        SignIn login = login();
-
-        user.setUsername("signUpOk");
-        user.setEmail("signupok@teste.com");
-        login.setUsername("signUpOk");
-
-        MvcResult result = signUp(user);
-        assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
-
-        result = signIn(login);
-        assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
-    }
-
-    @Test
-    void whenRegisterInvalidUser() throws Exception {
-        SignUp user = user();
-        user.setUsername("");
-        MvcResult result = signUp(user);
-        assertEquals(HttpStatus.BAD_REQUEST.value(), result.getResponse().getStatus());
-    }
-
-    @Test
-    void whenRegisterInvalidEmail() throws Exception {
-        SignUp user = user();
-        user.setEmail("invalid");
-
-        MvcResult result = signUp(user);
-        assertEquals(HttpStatus.BAD_REQUEST.value(), result.getResponse().getStatus());
-    }
-
-    @Test
-    void whenRegisterInvalidPassword() throws Exception {
-        SignUp user = user();
-        user.setPassword("123");
-
-        MvcResult result = signUp(user);
-        assertEquals(HttpStatus.BAD_REQUEST.value(), result.getResponse().getStatus());
-    }
-
-    @Test
     void whenNotLoggedInvalidUser() throws Exception {
 
         SignUp user = user();
@@ -81,7 +39,7 @@ class AuthControllerTest extends AbstractTest {
         assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
 
         result = signIn(login);
-        assertTrue( HttpStatus.valueOf(result.getResponse().getStatus()).is4xxClientError());
+        assertTrue(HttpStatus.valueOf(result.getResponse().getStatus()).is4xxClientError());
     }
 
     @Test
@@ -89,7 +47,7 @@ class AuthControllerTest extends AbstractTest {
         SignIn login = login();
         login.setUsername("credentials");
         MvcResult result = signIn(login);
-        assertTrue( HttpStatus.valueOf(result.getResponse().getStatus()).is4xxClientError());
+        assertTrue(HttpStatus.valueOf(result.getResponse().getStatus()).is4xxClientError());
     }
 
     @Test
