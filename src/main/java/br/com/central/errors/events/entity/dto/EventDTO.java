@@ -1,7 +1,6 @@
 package br.com.central.errors.events.entity.dto;
 
-import br.com.central.errors.events.entity.Level;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import br.com.central.errors.events.entity.enums.Level;
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,10 +15,9 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@ApiModel(value = "Request Event")
-public class EventRequest {
+@ApiModel(value = "EventDTO")
+public class EventDTO {
 
-    @JsonIgnore
     private Long id;
 
     @NotNull
@@ -39,9 +37,4 @@ public class EventRequest {
 
     @Positive
     private Integer quantity;
-
-    @NotBlank
-    private String log;
-
 }
-

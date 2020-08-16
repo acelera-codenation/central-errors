@@ -8,10 +8,7 @@ import org.springframework.context.annotation.Import;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.ApiKey;
-import springfox.documentation.service.AuthorizationScope;
-import springfox.documentation.service.SecurityReference;
+import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.data.rest.configuration.SpringDataRestConfiguration;
@@ -28,23 +25,9 @@ import java.util.List;
 public class SwaggerConfig {
     private static final String PATH_MAPPING = "/";
 
-    @Value("${info.app.versao:v1}")
-    private String projetoVersao;
+    @Value("${app.version:0.0.1}")
+    private String appVersion;
 
-    @Value("${info.app.nome:Controle-Patrimonial}")
-    private String nomeApi;
-
-    @Value("${info.app.descricao:App}")
-    private String descricao;
-
-    @Value("${spring.profiles.active:dev}")
-    private String profile;
-
-    /**
-     * Gets docket api.
-     *
-     * @return the docket api
-     */
     @Bean
     Docket getDocketApi() {
 
@@ -62,9 +45,15 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title(nomeApi)
-                .description(descricao + " - Profile: " + profile)
-                .version(projetoVersao)
+                .title("Central Errors")
+                .description("Codenation Final Challenges / Central Errors")
+                .license("MIT License")
+                .licenseUrl("https://github.com/acelera-codenation/central-errors/blob/master/LICENSE")
+                .version(appVersion)
+                .contact(new Contact("Samuel Santos",
+                        "https://www.linkedin.com/in/samuelssantos",
+                        "")
+                )
                 .build();
     }
 

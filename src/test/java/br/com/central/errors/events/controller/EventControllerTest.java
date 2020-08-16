@@ -1,31 +1,27 @@
 package br.com.central.errors.events.controller;
 
-import br.com.central.errors.App;
-import br.com.central.errors.events.entity.Level;
-import br.com.central.errors.events.entity.dto.EventLogResponse;
-import br.com.central.errors.events.entity.dto.EventRequest;
+import br.com.central.errors.events.entity.dto.EventDTO;
+import br.com.central.errors.events.entity.dto.EventLogDTO;
+import br.com.central.errors.events.entity.enums.Level;
 import br.com.central.errors.security.entity.dto.SignUp;
 import br.com.central.errors.suite.AbstractTest;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(classes = App.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Sql("/pre-sql.sql")
 class EventControllerTest extends AbstractTest {
 
-    private EventRequest getEvent() {
-        EventRequest request = new EventRequest();
+    private EventLogDTO getEvent() {
+        EventLogDTO request = new EventLogDTO();
         request.setDate(LocalDateTime.now());
         request.setDescription("Teste");
         request.setLevel(Level.ERROR);
@@ -42,9 +38,9 @@ class EventControllerTest extends AbstractTest {
         return getBearerToken(user);
     }
 
-    private EventLogResponse getContentEventLogResponse(MvcResult result) throws UnsupportedEncodingException, com.fasterxml.jackson.core.JsonProcessingException {
+    private EventLogDTO getContentEventLogResponse(MvcResult result) throws UnsupportedEncodingException, com.fasterxml.jackson.core.JsonProcessingException {
         String response = result.getResponse().getContentAsString();
-        return JsonToMap(response, EventLogResponse.class);
+        return JsonToMap(response, EventLogDTO.class);
     }
 
     @Test
@@ -52,6 +48,31 @@ class EventControllerTest extends AbstractTest {
         mvc.perform(get("/api/events")
                 .header("Authorization", getAuthToken()))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    void whenEventsByLevel() throws Exception {
+        mvc.perform(get("/api/events?level=ERROR")
+                .header("Authorization", getAuthToken()))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void whenFindAllEventsWithoutPropertyLog() throws Exception {
+        MvcResult result = mvc.perform(get("/api/events")
+                .header("Authorization", getAuthToken()))
+                .andExpect(status().isOk()).andReturn();
+
+        assertFalse(result.getResponse().getContentAsString().contains("log:"));
+    }
+
+    @Test
+    void whenFindAllEventsPageOne() throws Exception {
+        MvcResult result = mvc.perform(get("/api/events?page=1")
+                .header("Authorization", getAuthToken()))
+                .andExpect(status().isOk()).andReturn();
+
+        assertFalse(result.getResponse().getContentAsString().contains("log:"));
     }
 
     @Test
@@ -65,7 +86,7 @@ class EventControllerTest extends AbstractTest {
 
     @Test
     void whenFindByIdReturnError() throws Exception {
-        mvc.perform(get("/api/events/3")
+        mvc.perform(get("/api/events/-1")
                 .header("Authorization", getAuthToken()))
                 .andExpect(status().is4xxClientError());
     }
@@ -77,7 +98,7 @@ class EventControllerTest extends AbstractTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated()).andReturn();
 
-        EventLogResponse eventSaved = getContentEventLogResponse(result);
+        EventLogDTO eventSaved = getContentEventLogResponse(result);
 
         assertNotNull(eventSaved.getId());
     }
@@ -86,7 +107,7 @@ class EventControllerTest extends AbstractTest {
     void whenUpdateEvent() throws Exception {
         String token = getAuthToken();
 
-        EventRequest request = getEvent();
+        EventDTO request = getEvent();
 
         MvcResult result = mvc.perform(post("/api/events")
                 .content(mapToJson(request))
@@ -95,7 +116,7 @@ class EventControllerTest extends AbstractTest {
                 .andExpect(status().isCreated())
                 .andReturn();
 
-        EventLogResponse eventSaved = getContentEventLogResponse(result);
+        EventLogDTO eventSaved = getContentEventLogResponse(result);
         assertNotNull(eventSaved.getId());
         eventSaved.setLevel(Level.WARNING);
 
@@ -117,7 +138,7 @@ class EventControllerTest extends AbstractTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated()).andReturn();
 
-        EventLogResponse eventSaved = getContentEventLogResponse(result);
+        EventLogDTO eventSaved = getContentEventLogResponse(result);
 
         assertNotNull(eventSaved.getId());
 

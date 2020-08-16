@@ -2,7 +2,6 @@ package br.com.central.errors.security.repository;
 
 import br.com.central.errors.security.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
@@ -10,7 +9,6 @@ import java.util.Optional;
 /**
  * The interface User repository.
  */
-@Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     /**
      * Find by username optional.

@@ -88,7 +88,8 @@ public class UserService implements UserDetailsService, UserInterface {
 
         User user = repository.findByUsername(account.getUsername()).orElseThrow(ResourceNotFoundException::new);
 
-        if (!encoder.matches(account.getPassword(), user.getPassword())) throw new PasswordMatchException("user.password_wrong");
+        if (!encoder.matches(account.getPassword(), user.getPassword()))
+            throw new PasswordMatchException("user.password_wrong");
 
         user.setPassword(encoder.encode(account.getNewPassword()));
 

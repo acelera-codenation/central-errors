@@ -21,10 +21,10 @@ public class JwtService {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtService.class);
 
-    @Value("${api.app.jwtSecret:SecretKey}")
+    @Value("${app.jwtSecret:SecretKey}")
     private String jwtSecret;
 
-    @Value("${api.app.jwtExpirationMs:86400000}") //24hs
+    @Value("${app.jwtExpirationMs:86400000}") //24hs
     private int jwtExpirationTime;
 
     /**

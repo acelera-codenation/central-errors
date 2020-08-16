@@ -1,0 +1,30 @@
+spring:
+  h2:
+    console:
+      enabled: false
+      path: /h2
+  datasource:
+    schema-username: sa
+    password: sa
+    url: jdbc:h2:mem:central-errors
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+  profiles:
+    active: test
+
+##Oauth2
+security:
+  oauth2:
+    client:
+      scope: password
+      id: id
+      client-secret: test
+
+api:
+  app:
+    jwtSecret: teste
+    jwtExpirationTime: 6000

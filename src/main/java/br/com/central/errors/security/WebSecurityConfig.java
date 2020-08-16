@@ -71,6 +71,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/webjars/**",
                         "/actuator/**",
                         "/auth/**",
+                        "/api/events/search2**",
                         "/user/register").permitAll()
                 .anyRequest().authenticated();
 

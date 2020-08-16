@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@ApiModel(value = "Event Response with log")
-public class EventLogResponse extends EventResponse {
+@ApiModel(value = "EventLogDTO")
+public class EventLogDTO extends EventDTO {
     private String log;
 }

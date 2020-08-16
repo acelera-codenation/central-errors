@@ -1,5 +1,7 @@
 package br.com.central.errors.events.entity;
 
+import br.com.central.errors.events.entity.enums.Level;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +14,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "event")
 @EntityListeners(AuditingEntityListener.class)
 @ApiModel(value = "Event")
 public class Event {
@@ -38,6 +40,7 @@ public class Event {
 
     @NotNull
     @Column(name = "date_error")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime date;
 
     @NotNull
