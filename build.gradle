@@ -142,3 +142,7 @@ compileJava {
             '-Aquerydsl.includedClasses=br.com.central.errors.events.entity.Event'
     ]
 }
+
+bootBuildImage {
+    imageName = "samuelssantos/central-errors"
+}

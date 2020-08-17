@@ -9,21 +9,21 @@ services:
       - database.env
     volumes:
       - database-data:/var/lib/postgresql/data/
-#  central-errors:
-#    container_name: central-errors
-#    build:
-#      context: ../
-#      args:
-#        - "JAR_PATH=/target/errors-central-0.0.1-SNAPSHOT.jar"
-#    depends_on:
-#      - "db"
-#    command: ["./wait-for-it.sh", "db:5432"]
-#    ports:
-#      - 8085:8085
-#    env_file:
-#      - env_file.env
-#    volumes:
-#      - appdata:/usr/src/app/
+  central-errors:
+    container_name: central-errors
+    build:
+      context: ../
+      args:
+        - "JAR_PATH=/build/libs/central-errors-0.0.1-SNAPSHOT.jar"
+    depends_on:
+      - "db"
+    command: ["./wait-for-it.sh", "db:5432"]
+    ports:
+      - 8086:8086
+    env_file:
+      - .env
+    volumes:
+      - appdata:/usr/src/app/
 
 volumes:
   database-data:

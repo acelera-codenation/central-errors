@@ -53,7 +53,7 @@ public class UserController {
     @ApiResponses({
             @ApiResponse(code = 202, message = "Success", response = ResponseMessage.class),
             @ApiResponse(code = 400, message = "Bad request", response = ResponseMessageError.class),
-            @ApiResponse(code = 401, message = "401 Unauthorized", response = ResponseMessageError.class),
+            @ApiResponse(code = 401, message = "Unauthorized", response = ResponseMessageError.class),
             @ApiResponse(code = 404, message = "Not found", response = ResponseMessageError.class),
             @ApiResponse(code = 500, message = "Internal server error", response = ResponseMessageError.class)
     })

@@ -1,4 +1,4 @@
-FROM openjdk:11-jdk-alpine
+FROM openjdk:11-jdk
 VOLUME /tmp
 ARG JAR_PATH
 COPY $JAR_PATH app.jar
