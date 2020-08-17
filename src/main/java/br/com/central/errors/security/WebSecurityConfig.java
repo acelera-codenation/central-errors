@@ -16,10 +16,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import javax.servlet.http.HttpServletResponse;
 
-/**
- * The type Web security config custom.
- */
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -28,11 +27,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserService service;
 
-    /**
-     * Authentication jwt token filter once per request filter custom.
-     *
-     * @return the once per request filter custom
-     */
     @Bean
     public OncePerRequestFilterCustom authenticationJwtTokenFilter() {
         return new OncePerRequestFilterCustom();
@@ -49,11 +43,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-    /**
-     * Password encoder password encoder.
-     *
-     * @return the password encoder
-     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -61,6 +50,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+        http.exceptionHandling()
+                .accessDeniedHandler((request, response, accessDeniedException) -> {
+                    response.sendError(HttpServletResponse.SC_FORBIDDEN);
+                })
+                .authenticationEntryPoint((request, response, authException) -> {
+                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                });
+
+
         http.cors().and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()

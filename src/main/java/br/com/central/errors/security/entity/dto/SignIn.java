@@ -8,20 +8,17 @@ import lombok.Setter;
 import javax.validation.constraints.NotBlank;
 
 
-/**
- * The type Login dto.
- */
 @Getter
 @Setter
 @ApiModel(value = "Login", description = "Login")
 public class SignIn {
 
     @NotBlank(message = "{sign.username.not_blank}")
-    @ApiModelProperty(required = true)
+    @ApiModelProperty(required = true, example = "zelda")
     private String username;
 
     @NotBlank(message = "{sign.username.not_blank}")
-    @ApiModelProperty(required = true)
+    @ApiModelProperty(required = true, example = "C0mput3r")
     private String password;
 
 }

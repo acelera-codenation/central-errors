@@ -26,5 +26,6 @@ security:
 
 api:
   app:
-    jwtSecret: teste
-    jwtExpirationTime: 6000
+    jwt:
+      secret: teste
+      expirationTime: 6000

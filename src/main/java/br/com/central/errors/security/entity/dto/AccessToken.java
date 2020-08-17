@@ -5,13 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-/**
- * The type Jwt response dto.
- */
 @Getter
 @Setter
 @NoArgsConstructor
-@ApiModel(value = "Response Access Bearer Token", description = "Response Access Bearer Token")
+@ApiModel(description = "Response Access Bearer Token")
 public class AccessToken {
     private String token;
     private String type = "Bearer";
@@ -19,14 +16,6 @@ public class AccessToken {
     private String username;
     private String email;
 
-    /**
-     * Instantiates a new Jwt response dto.
-     *
-     * @param jwt      the jwt
-     * @param id       the id
-     * @param username the username
-     * @param email    the email
-     */
     public AccessToken(String jwt, Long id, String username, String email) {
         this.token = jwt;
         this.id = id;

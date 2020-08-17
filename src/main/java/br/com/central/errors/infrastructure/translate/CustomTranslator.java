@@ -1,6 +1,7 @@
 package br.com.central.errors.infrastructure.translate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
@@ -11,7 +12,7 @@ public class CustomTranslator {
     static MessageSource messageSource;
 
     @Autowired
-    CustomTranslator(MessageSource msg) {
+    CustomTranslator(@Qualifier("messageSource") MessageSource msg) {
         CustomTranslator.messageSource = msg;
     }
 

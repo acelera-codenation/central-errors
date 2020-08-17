@@ -19,9 +19,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
-/**
- * The type User service.
- */
 @Service
 public class UserService implements UserDetailsService, UserInterface {
 

@@ -7,9 +7,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-/**
- * The type User details custom.
- */
 @Getter
 @RequiredArgsConstructor
 public class UserDetailsCustom implements UserDetails {
@@ -27,12 +24,6 @@ public class UserDetailsCustom implements UserDetails {
         this.password = password;
     }
 
-    /**
-     * Build user details custom.
-     *
-     * @param user the user
-     * @return the user details custom
-     */
     public static UserDetailsCustom build(User user) {
         return new UserDetailsCustom(
                 user.getId(),

@@ -11,6 +11,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -21,8 +22,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class EventControllerTest extends AbstractTest {
 
     private EventLogDTO getEvent() {
+        LocalDate date = LocalDate.now();
         EventLogDTO request = new EventLogDTO();
-        request.setDate(LocalDateTime.now());
+        request.setDate(date);
         request.setDescription("Teste");
         request.setLevel(Level.ERROR);
         request.setLog("Log teste whenSaveEvent");
@@ -135,8 +137,10 @@ class EventControllerTest extends AbstractTest {
 
         MvcResult result = mvc.perform(post("/api/events").content(mapToJson(getEvent()))
                 .header("Authorization", token)
+                .header("Accept-Language", "pt-br")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated()).andReturn();
+
 
         EventLogDTO eventSaved = getContentEventLogResponse(result);
 
@@ -144,7 +148,7 @@ class EventControllerTest extends AbstractTest {
 
         mvc.perform(delete("/api/events/" + eventSaved.getId())
                 .header("Authorization", token))
-                .andExpect(status().isAccepted());
+                .andExpect(status().isNoContent());
     }
 
     @Test

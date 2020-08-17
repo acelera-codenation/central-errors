@@ -8,9 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-/**
- * The type User.User
- */
 @Entity
 @Getter
 @NoArgsConstructor
@@ -22,6 +19,7 @@ import javax.validation.constraints.NotBlank;
         })
 @EntityListeners(AuditingEntityListener.class)
 public class User extends AuditModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -38,13 +36,6 @@ public class User extends AuditModel {
     @NotBlank
     private String password;
 
-    /**
-     * Instantiates a new User.
-     *
-     * @param username the username
-     * @param email    the email
-     * @param password the password
-     */
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
