@@ -1,0 +1,1829 @@
+{
+	"info": {
+		"_postman_id": "57bc8d31-fda0-4ae3-b7e3-3080ed91fc75",
+		"name": "Central-Errors",
+		"description": "Codenation Final Challenge - Central Errors\n\nContact Support:\n Name: Samuel Santos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "api/events",
+			"item": [
+				{
+					"name": "{id}",
+					"item": [
+						{
+							"name": "{{baseUrl}}/api/events/:id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "pt-br",
+										"key": "Accept-Language",
+										"value": "<string>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/events/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"events",
+										":id"
+									],
+									"variable": [
+										{
+											"id": "cb37260a-948e-4efd-a3f6-508b52865333",
+											"key": "id",
+											"value": "<long>",
+											"type": "string",
+											"description": "(Required) id"
+										}
+									]
+								},
+								"description": "All event information was returned"
+							},
+							"response": [
+								{
+									"name": "Internal server error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "pt-br",
+												"key": "Accept-Language",
+												"value": "<string>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/events/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"events",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"message\": [\n  \"esse\",\n  \"esse elit proident dolor Excepteur\"\n ],\n \"status\": 400,\n \"timestamp\": \"2020-08-16 13:10:27\"\n}"
+								},
+								{
+									"name": "Bad request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "pt-br",
+												"key": "Accept-Language",
+												"value": "<string>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/events/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"events",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"message\": [\n  \"esse\",\n  \"esse elit proident dolor Excepteur\"\n ],\n \"status\": 400,\n \"timestamp\": \"2020-08-16 13:10:27\"\n}"
+								},
+								{
+									"name": "Not found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "pt-br",
+												"key": "Accept-Language",
+												"value": "<string>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/events/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"events",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"message\": [\n  \"esse\",\n  \"esse elit proident dolor Excepteur\"\n ],\n \"status\": 400,\n \"timestamp\": \"2020-08-16 13:10:27\"\n}"
+								},
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "pt-br",
+												"key": "Accept-Language",
+												"value": "<string>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/events/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"events",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"date\": \"2020-08-16\",\n \"description\": \"Triggering deferred initialization of Spring Data repositories…\",\n \"level\": \"INFO\",\n \"log\": \"Retrograde clock change detected, soft-evicting connections from pool.\",\n \"origin\": \"o.s.web.servlet.DispatcherServlet\",\n \"quantity\": \"<integer>\"\n}"
+								}
+							]
+						},
+						{
+							"name": "{{baseUrl}}/api/events/:id",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "pt-br",
+										"key": "Accept-Language",
+										"value": "<string>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/events/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"events",
+										":id"
+									],
+									"variable": [
+										{
+											"id": "41795e24-493a-4319-bd84-9cf1bdbd4462",
+											"key": "id",
+											"value": "<long>",
+											"type": "string",
+											"description": "(Required) id"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": "pt-br",
+												"key": "Accept-Language",
+												"value": "<string>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/events/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"events",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Internal server error",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": "pt-br",
+												"key": "Accept-Language",
+												"value": "<string>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/events/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"events",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"message\": [\n  \"esse\",\n  \"esse elit proident dolor Excepteur\"\n ],\n \"status\": 400,\n \"timestamp\": \"2020-08-16 13:10:27\"\n}"
+								},
+								{
+									"name": "Resource not found",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": "pt-br",
+												"key": "Accept-Language",
+												"value": "<string>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/events/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"events",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"message\": [\n  \"esse\",\n  \"esse elit proident dolor Excepteur\"\n ],\n \"status\": 400,\n \"timestamp\": \"2020-08-16 13:10:27\"\n}"
+								},
+								{
+									"name": "401 Unauthorized",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": "pt-br",
+												"key": "Accept-Language",
+												"value": "<string>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/events/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"events",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"message\": [\n  \"esse\",\n  \"esse elit proident dolor Excepteur\"\n ],\n \"status\": 400,\n \"timestamp\": \"2020-08-16 13:10:27\"\n}"
+								}
+							]
+						},
+						{
+							"name": "{{baseUrl}}/api/events/:id",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"description": "pt-br",
+										"key": "Accept-Language",
+										"value": "<string>"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"date\": \"<date>\",\n    \"description\": \"<string>\",\n    \"level\": \"<string>\",\n    \"log\": \"<string>\",\n    \"origin\": \"<string>\",\n    \"quantity\": \"<integer>\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/events/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"events",
+										":id"
+									],
+									"variable": [
+										{
+											"id": "ea4af6fe-6e18-4020-97f3-f7cc11866402",
+											"key": "id",
+											"value": "<long>",
+											"type": "string",
+											"description": "(Required) id"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Bad request",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"description": "pt-br",
+												"key": "Accept-Language",
+												"value": "<string>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/events/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"events",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"message\": [\n  \"esse\",\n  \"esse elit proident dolor Excepteur\"\n ],\n \"status\": 400,\n \"timestamp\": \"2020-08-16 13:10:27\"\n}"
+								},
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"description": "pt-br",
+												"key": "Accept-Language",
+												"value": "<string>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/events/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"events",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Accepted",
+									"code": 202,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"date\": \"2020-08-16\",\n \"description\": \"Triggering deferred initialization of Spring Data repositories…\",\n \"level\": \"INFO\",\n \"log\": \"Retrograde clock change detected, soft-evicting connections from pool.\",\n \"origin\": \"o.s.web.servlet.DispatcherServlet\",\n \"quantity\": \"<integer>\"\n}"
+								},
+								{
+									"name": "401 Unauthorized",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"description": "pt-br",
+												"key": "Accept-Language",
+												"value": "<string>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/events/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"events",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"message\": [\n  \"esse\",\n  \"esse elit proident dolor Excepteur\"\n ],\n \"status\": 400,\n \"timestamp\": \"2020-08-16 13:10:27\"\n}"
+								},
+								{
+									"name": "Internal server error",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"description": "pt-br",
+												"key": "Accept-Language",
+												"value": "<string>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/events/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"events",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"message\": [\n  \"esse\",\n  \"esse elit proident dolor Excepteur\"\n ],\n \"status\": 400,\n \"timestamp\": \"2020-08-16 13:10:27\"\n}"
+								},
+								{
+									"name": "Not found",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"description": "pt-br",
+												"key": "Accept-Language",
+												"value": "<string>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/events/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"events",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"message\": [\n  \"esse\",\n  \"esse elit proident dolor Excepteur\"\n ],\n \"status\": 400,\n \"timestamp\": \"2020-08-16 13:10:27\"\n}"
+								}
+							]
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "{{baseUrl}}/api/events",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"date\": \"<date>\",\n    \"description\": \"<string>\",\n    \"level\": \"<string>\",\n    \"log\": \"<string>\",\n    \"origin\": \"<string>\",\n    \"quantity\": \"<integer>\"\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/events",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"events"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/events",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"events"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"date\": \"2020-08-16\",\n \"description\": \"Triggering deferred initialization of Spring Data repositories…\",\n \"level\": \"INFO\",\n \"log\": \"Retrograde clock change detected, soft-evicting connections from pool.\",\n \"origin\": \"o.s.web.servlet.DispatcherServlet\",\n \"quantity\": \"<integer>\"\n}"
+						},
+						{
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/events",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"events"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"message\": [\n  \"esse\",\n  \"esse elit proident dolor Excepteur\"\n ],\n \"status\": 400,\n \"timestamp\": \"2020-08-16 13:10:27\"\n}"
+						},
+						{
+							"name": "401 Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/events",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"events"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"message\": [\n  \"esse\",\n  \"esse elit proident dolor Excepteur\"\n ],\n \"status\": 400,\n \"timestamp\": \"2020-08-16 13:10:27\"\n}"
+						},
+						{
+							"name": "Bad request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/events",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"events"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"message\": [\n  \"Teste\"\n ],\n \"status\": 400,\n \"timestamp\": \"2020-08-16 13:10:27\"\n}"
+						},
+						{
+							"name": "Not found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/events",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"events"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"message\": [\n  \"esse\",\n  \"esse elit proident dolor Excepteur\"\n ],\n \"status\": 400,\n \"timestamp\": \"2020-08-16 13:10:27\"\n}"
+						}
+					]
+				},
+				{
+					"name": "{{baseUrl}}/api/events/",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "pt-br",
+								"key": "Accept-Language",
+								"value": "<string>"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/events/?date=<date>&description=<string>&level=<string>&log=<string>&origin=<string>&page=<integer>&quantity=<string>&size=<integer>&sort=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"events",
+								""
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "<date>",
+									"description": "date"
+								},
+								{
+									"key": "description",
+									"value": "<string>",
+									"description": "description"
+								},
+								{
+									"key": "level",
+									"value": "<string>",
+									"description": "level"
+								},
+								{
+									"key": "log",
+									"value": "<string>",
+									"description": "log"
+								},
+								{
+									"key": "origin",
+									"value": "<string>",
+									"description": "origin"
+								},
+								{
+									"key": "page",
+									"value": "<integer>"
+								},
+								{
+									"key": "quantity",
+									"value": "<string>",
+									"description": "quantity"
+								},
+								{
+									"key": "size",
+									"value": "<integer>"
+								},
+								{
+									"key": "sort",
+									"value": "<string>"
+								}
+							]
+						},
+						"description": "Search events by: Level, Description, log, Origin, Date and Quantity. Note: At this endpoint you can't see log properties."
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "pt-br",
+										"key": "Accept-Language",
+										"value": "<string>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/events/?date=<date>&description=<string>&level=<string>&log=<string>&origin=<string>&page=<integer>&quantity=<string>&size=<integer>&sort=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"events",
+										""
+									],
+									"query": [
+										{
+											"key": "date",
+											"value": "<date>"
+										},
+										{
+											"key": "description",
+											"value": "<string>"
+										},
+										{
+											"key": "level",
+											"value": "<string>"
+										},
+										{
+											"key": "log",
+											"value": "<string>"
+										},
+										{
+											"key": "origin",
+											"value": "<string>"
+										},
+										{
+											"key": "page",
+											"value": "<integer>"
+										},
+										{
+											"key": "quantity",
+											"value": "<string>"
+										},
+										{
+											"key": "size",
+											"value": "<integer>"
+										},
+										{
+											"key": "sort",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n {\n  \"date\": \"2020-08-16\",\n  \"description\": \"Triggering deferred initialization of Spring Data repositories…\",\n  \"level\": \"INFO\",\n  \"origin\": \"o.s.web.servlet.DispatcherServlet\",\n  \"quantity\": 63542215\n },\n {\n  \"date\": \"2020-08-16\",\n  \"description\": \"Triggering deferred initialization of Spring Data repositories…\",\n  \"level\": \"INFO\",\n  \"origin\": \"o.s.web.servlet.DispatcherServlet\",\n  \"quantity\": 70337744\n }\n]"
+						},
+						{
+							"name": "401 Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "pt-br",
+										"key": "Accept-Language",
+										"value": "<string>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/events/?date=<date>&description=<string>&level=<string>&log=<string>&origin=<string>&page=<integer>&quantity=<string>&size=<integer>&sort=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"events",
+										""
+									],
+									"query": [
+										{
+											"key": "date",
+											"value": "<date>"
+										},
+										{
+											"key": "description",
+											"value": "<string>"
+										},
+										{
+											"key": "level",
+											"value": "<string>"
+										},
+										{
+											"key": "log",
+											"value": "<string>"
+										},
+										{
+											"key": "origin",
+											"value": "<string>"
+										},
+										{
+											"key": "page",
+											"value": "<integer>"
+										},
+										{
+											"key": "quantity",
+											"value": "<string>"
+										},
+										{
+											"key": "size",
+											"value": "<integer>"
+										},
+										{
+											"key": "sort",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"message\": [\n  \"esse\",\n  \"esse elit proident dolor Excepteur\"\n ],\n \"status\": 400,\n \"timestamp\": \"2020-08-16 13:10:27\"\n}"
+						},
+						{
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "pt-br",
+										"key": "Accept-Language",
+										"value": "<string>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/events/?date=<date>&description=<string>&level=<string>&log=<string>&origin=<string>&page=<integer>&quantity=<string>&size=<integer>&sort=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"events",
+										""
+									],
+									"query": [
+										{
+											"key": "date",
+											"value": "<date>"
+										},
+										{
+											"key": "description",
+											"value": "<string>"
+										},
+										{
+											"key": "level",
+											"value": "<string>"
+										},
+										{
+											"key": "log",
+											"value": "<string>"
+										},
+										{
+											"key": "origin",
+											"value": "<string>"
+										},
+										{
+											"key": "page",
+											"value": "<integer>"
+										},
+										{
+											"key": "quantity",
+											"value": "<string>"
+										},
+										{
+											"key": "size",
+											"value": "<integer>"
+										},
+										{
+											"key": "sort",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"message\": [\n  \"esse\",\n  \"esse elit proident dolor Excepteur\"\n ],\n \"status\": 400,\n \"timestamp\": \"2020-08-16 13:10:27\"\n}"
+						},
+						{
+							"name": "Not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "pt-br",
+										"key": "Accept-Language",
+										"value": "<string>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/events/?date=<date>&description=<string>&level=<string>&log=<string>&origin=<string>&page=<integer>&quantity=<string>&size=<integer>&sort=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"events",
+										""
+									],
+									"query": [
+										{
+											"key": "date",
+											"value": "<date>"
+										},
+										{
+											"key": "description",
+											"value": "<string>"
+										},
+										{
+											"key": "level",
+											"value": "<string>"
+										},
+										{
+											"key": "log",
+											"value": "<string>"
+										},
+										{
+											"key": "origin",
+											"value": "<string>"
+										},
+										{
+											"key": "page",
+											"value": "<integer>"
+										},
+										{
+											"key": "quantity",
+											"value": "<string>"
+										},
+										{
+											"key": "size",
+											"value": "<integer>"
+										},
+										{
+											"key": "sort",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"message\": [\n  \"esse\",\n  \"esse elit proident dolor Excepteur\"\n ],\n \"status\": 400,\n \"timestamp\": \"2020-08-16 13:10:27\"\n}"
+						},
+						{
+							"name": "Bad request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "pt-br",
+										"key": "Accept-Language",
+										"value": "<string>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/events/?date=<date>&description=<string>&level=<string>&log=<string>&origin=<string>&page=<integer>&quantity=<string>&size=<integer>&sort=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"events",
+										""
+									],
+									"query": [
+										{
+											"key": "date",
+											"value": "<date>"
+										},
+										{
+											"key": "description",
+											"value": "<string>"
+										},
+										{
+											"key": "level",
+											"value": "<string>"
+										},
+										{
+											"key": "log",
+											"value": "<string>"
+										},
+										{
+											"key": "origin",
+											"value": "<string>"
+										},
+										{
+											"key": "page",
+											"value": "<integer>"
+										},
+										{
+											"key": "quantity",
+											"value": "<string>"
+										},
+										{
+											"key": "size",
+											"value": "<integer>"
+										},
+										{
+											"key": "sort",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"message\": [\n  \"esse\",\n  \"esse elit proident dolor Excepteur\"\n ],\n \"status\": 400,\n \"timestamp\": \"2020-08-16 13:10:27\"\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "{{baseUrl}}/user/register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "pt-br",
+								"key": "Accept-Language",
+								"value": "<string>"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"<string>\",\n    \"password\": \"<string>\",\n    \"username\": \"<string>\"\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Bad request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "pt-br",
+										"key": "Accept-Language",
+										"value": "<string>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"zelda@codenation.com\",\n    \"password\": \"C0mput3r\",\n    \"username\": \"zelda\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"message\": [\n  \"esse\",\n  \"esse elit proident dolor Excepteur\"\n ],\n \"status\": 400,\n \"timestamp\": \"2020-08-16 13:10:27\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "pt-br",
+										"key": "Accept-Language",
+										"value": "<string>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"zelda@codenation.com\",\n    \"password\": \"C0mput3r\",\n    \"username\": \"zelda\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"register"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"message\": \"Update success\"\n}"
+						},
+						{
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "pt-br",
+										"key": "Accept-Language",
+										"value": "<string>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"zelda@codenation.com\",\n    \"password\": \"C0mput3r\",\n    \"username\": \"zelda\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"register"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"message\": [\n  \"esse\",\n  \"esse elit proident dolor Excepteur\"\n ],\n \"status\": 400,\n \"timestamp\": \"2020-08-16 13:10:27\"\n}"
+						},
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "pt-br",
+										"key": "Accept-Language",
+										"value": "<string>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"zelda@codenation.com\",\n    \"password\": \"C0mput3r\",\n    \"username\": \"zelda\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"message\": \"Update success\"\n}"
+						}
+					]
+				},
+				{
+					"name": "{{baseUrl}}/user/resetpassword",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "pt-br",
+								"key": "Accept-Language",
+								"value": "<string>"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"confirmPassword\": \"<string>\",\n    \"newPassword\": \"<string>\",\n    \"password\": \"<string>\",\n    \"username\": \"<string>\"\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/resetpassword",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"resetpassword"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "pt-br",
+										"key": "Accept-Language",
+										"value": "<string>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"confirmPassword\": \"newC0mput3r\",\n    \"newPassword\": \"newC0mput3r\",\n    \"password\": \"C0mput3r\",\n    \"username\": \"zelda\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/resetpassword",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"resetpassword"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"message\": [\n  \"esse\",\n  \"esse elit proident dolor Excepteur\"\n ],\n \"status\": 400,\n \"timestamp\": \"2020-08-16 13:10:27\"\n}"
+						},
+						{
+							"name": "401 Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "pt-br",
+										"key": "Accept-Language",
+										"value": "<string>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"confirmPassword\": \"newC0mput3r\",\n    \"newPassword\": \"newC0mput3r\",\n    \"password\": \"C0mput3r\",\n    \"username\": \"zelda\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/resetpassword",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"resetpassword"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"message\": [\n  \"esse\",\n  \"esse elit proident dolor Excepteur\"\n ],\n \"status\": 400,\n \"timestamp\": \"2020-08-16 13:10:27\"\n}"
+						},
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "pt-br",
+										"key": "Accept-Language",
+										"value": "<string>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"confirmPassword\": \"newC0mput3r\",\n    \"newPassword\": \"newC0mput3r\",\n    \"password\": \"C0mput3r\",\n    \"username\": \"zelda\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/resetpassword",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"resetpassword"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"message\": \"Update success\"\n}"
+						},
+						{
+							"name": "Not found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "pt-br",
+										"key": "Accept-Language",
+										"value": "<string>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"confirmPassword\": \"newC0mput3r\",\n    \"newPassword\": \"newC0mput3r\",\n    \"password\": \"C0mput3r\",\n    \"username\": \"zelda\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/resetpassword",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"resetpassword"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"message\": [\n  \"esse\",\n  \"esse elit proident dolor Excepteur\"\n ],\n \"status\": 400,\n \"timestamp\": \"2020-08-16 13:10:27\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "pt-br",
+										"key": "Accept-Language",
+										"value": "<string>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"confirmPassword\": \"newC0mput3r\",\n    \"newPassword\": \"newC0mput3r\",\n    \"password\": \"C0mput3r\",\n    \"username\": \"zelda\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/resetpassword",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"resetpassword"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"message\": \"Update success\"\n}"
+						},
+						{
+							"name": "Bad request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "pt-br",
+										"key": "Accept-Language",
+										"value": "<string>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"confirmPassword\": \"newC0mput3r\",\n    \"newPassword\": \"newC0mput3r\",\n    \"password\": \"C0mput3r\",\n    \"username\": \"zelda\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/resetpassword",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"resetpassword"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"message\": [\n  \"esse\",\n  \"esse elit proident dolor Excepteur\"\n ],\n \"status\": 400,\n \"timestamp\": \"2020-08-16 13:10:27\"\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "{{baseUrl}}/auth/login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"description": "pt-br",
+						"key": "Accept-Language",
+						"value": "<string>"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\": \"<string>\",\n    \"username\": \"<string>\"\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/auth/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "pt-br",
+								"key": "Accept-Language",
+								"value": "<string>"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"C0mput3r\",\n    \"username\": \"zelda\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n \"email\": \"ipsum esse non\",\n \"id\": 10966672,\n \"token\": \"dolore magna velit cillum\",\n \"type\": \"occ\",\n \"username\": \"Lore\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "7ce620b8-0860-47f9-a4e8-5873015299d7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "6edf13d6-52b1-4392-87dd-7ec5292246e9",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "c5f449df-aca9-48ac-97b0-4232eff2852a",
+			"key": "baseUrl",
+			"value": "localhost:8086"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

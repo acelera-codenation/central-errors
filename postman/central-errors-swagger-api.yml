@@ -1,0 +1,626 @@
+swagger: '2.0'
+info:
+  description: Codenation Final Challenge - Central Errors
+  version: 1.0.0
+  title: API - Central Errors
+  contact:
+    name: Samuel Santos
+    url: 'https://www.linkedin.com/in/samuelssantos'
+  license:
+    name: MIT License
+    url: 'https://github.com/acelera-codenation/central-errors/blob/master/LICENSE'
+host: 'localhost:8086'
+basePath: /
+tags:
+  - name: events
+    description: Event Controller
+  - name: security
+    description: User Controller
+paths:
+  /api/events:
+    post:
+      tags:
+        - events
+      summary: Save event
+      operationId: saveUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: request
+          description: request
+          required: true
+          schema:
+            $ref: '#/definitions/EventLogDTO'
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/EventLogDTO'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ResponseMessageError'
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/ResponseMessageError'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ResponseMessageError'
+        '500':
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/ResponseMessageError'
+  '/api/events/{id}':
+    get:
+      tags:
+        - events
+      summary: 'Find event by {id}'
+      description: All event information was returned
+      operationId: findByIdUsingGET
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: Accept-Language
+          type: string
+          description: pt-br
+          required: false
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EventLogDTO'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ResponseMessageError'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ResponseMessageError'
+        '500':
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/ResponseMessageError'
+    delete:
+      tags:
+        - events
+      summary: delete
+      operationId: deleteUsingDELETE
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: Accept-Language
+          description: pt-br
+          required: false
+          type: string
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '204':
+          description: Success
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/ResponseMessageError'
+        '404':
+          description: Resource not found
+          schema:
+            $ref: '#/definitions/ResponseMessageError'
+        '500':
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/ResponseMessageError'
+    patch:
+      tags:
+        - events
+      summary: update
+      operationId: updateUsingPATCH
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: Accept-Language
+          description: pt-br
+          required: false
+          type: string
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+        - in: body
+          name: request
+          description: request
+          required: true
+          schema:
+            $ref: '#/definitions/EventLogDTO'
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/EventLogDTO'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ResponseMessageError'
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/ResponseMessageError'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ResponseMessageError'
+        '500':
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/ResponseMessageError'
+  '/api/events/':
+    get:
+      tags:
+        - events
+      summary: Search events
+      description: >-
+        Search events by: Level, Description, log, Origin, Date and Quantity.
+        Note: At this endpoint you can't see log properties.
+      operationId: findAllUsingGET
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: Accept-Language
+          description: pt-br
+          required: false
+          type: string
+        - name: date
+          in: query
+          description: date
+          required: false
+          type: string
+          format: date
+        - name: description
+          in: query
+          description: description
+          required: false
+          type: string
+        - name: level
+          in: query
+          description: level
+          required: false
+          type: string
+          enum:
+            - ERROR
+            - INFO
+            - WARNING
+        - name: log
+          in: query
+          description: log
+          required: false
+          type: string
+        - name: origin
+          in: query
+          description: origin
+          required: false
+          type: string
+        - name: page
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: quantity
+          in: query
+          description: quantity
+          required: false
+          type: string
+        - name: size
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/EventDTO'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ResponseMessageError'
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/ResponseMessageError'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ResponseMessageError'
+        '500':
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/ResponseMessageError'
+  /auth/login:
+    post:
+      tags:
+        - security
+      summary: login
+      operationId: loginUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: Accept-Language
+          description: pt-br
+          required: false
+          type: string
+        - in: body
+          name: signIn
+          description: signIn
+          required: true
+          schema:
+            $ref: '#/definitions/Login'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AccessToken'
+  /user/register:
+    post:
+      tags:
+        - security
+      summary: register
+      operationId: registerUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: Accept-Language
+          description: pt-br
+          required: false
+          type: string
+        - in: body
+          name: signUp
+          description: signUp
+          required: true
+          schema:
+            $ref: '#/definitions/SignUp'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ResponseMessage'
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/ResponseMessage'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ResponseMessageError'
+        '500':
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/ResponseMessageError'
+  /user/resetpassword:
+    post:
+      tags:
+        - security
+      summary: resetPassword
+      operationId: resetPasswordUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: Accept-Language
+          description: pt-br
+          required: false
+          type: string
+        - in: body
+          name: account
+          description: account
+          required: true
+          schema:
+            $ref: '#/definitions/ResetPassword'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ResponseMessage'
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/ResponseMessage'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ResponseMessageError'
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/ResponseMessageError'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ResponseMessageError'
+        '500':
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/ResponseMessageError'
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  AccessToken:
+    type: object
+    properties:
+      email:
+        type: string
+      id:
+        type: integer
+        format: int64
+      token:
+        type: string
+      type:
+        type: string
+      username:
+        type: string
+    title: AccessToken
+    description: Response Access Bearer Token
+  EventDTO:
+    type: object
+    required:
+      - date
+      - description
+      - level
+      - origin
+      - quantity
+    properties:
+      date:
+        type: string
+        format: date
+        example: '2020-08-16'
+      description:
+        type: string
+        example: Triggering deferred initialization of Spring Data repositories…
+        minLength: 0
+        maxLength: 255
+      level:
+        type: string
+        example: INFO
+        enum:
+          - ERROR
+          - INFO
+          - WARNING
+      origin:
+        type: string
+        example: o.s.web.servlet.DispatcherServlet
+        minLength: 0
+        maxLength: 100
+      quantity:
+        type: integer
+        format: int32
+        example: 1
+        minimum: 1
+        exclusiveMinimum: false
+    title: EventDTO
+  EventLogDTO:
+    type: object
+    required:
+      - date
+      - description
+      - level
+      - log
+      - origin
+      - quantity
+    properties:
+      date:
+        type: string
+        format: date
+        example: '2020-08-16'
+      description:
+        type: string
+        example: Triggering deferred initialization of Spring Data repositories…
+        minLength: 0
+        maxLength: 255
+      level:
+        type: string
+        example: INFO
+        enum:
+          - ERROR
+          - INFO
+          - WARNING
+      log:
+        type: string
+        example: 'Retrograde clock change detected, soft-evicting connections from pool.'
+      origin:
+        type: string
+        example: o.s.web.servlet.DispatcherServlet
+        minLength: 0
+        maxLength: 100
+      quantity:
+        type: integer
+        format: int32
+        example: 1
+        minimum: 1
+        exclusiveMinimum: false
+    title: EventLogDTO
+  Login:
+    type: object
+    required:
+      - password
+      - username
+    properties:
+      password:
+        type: string
+        example: C0mput3r
+      username:
+        type: string
+        example: zelda
+    title: Login
+    description: Login
+  Pageable:
+    type: object
+    properties:
+      page:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        type: string
+    title: Pageable
+  Page«EventDTO»:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/EventDTO'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      pageable:
+        $ref: '#/definitions/Pageable'
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+    title: Page«EventDTO»
+  ResetPassword:
+    type: object
+    required:
+      - confirmPassword
+      - newPassword
+      - password
+      - username
+    properties:
+      confirmPassword:
+        type: string
+        example: newC0mput3r
+        minLength: 6
+        maxLength: 40
+      newPassword:
+        type: string
+        example: newC0mput3r
+        minLength: 6
+        maxLength: 40
+      password:
+        type: string
+        example: C0mput3r
+        minLength: 6
+        maxLength: 40
+      username:
+        type: string
+        example: zelda
+        minLength: 3
+        maxLength: 20
+    title: Request Reset Password
+    description: Change Password
+  ResponseMessage:
+    type: object
+    properties:
+      message:
+        type: string
+        example: Update success
+    title: ResponseMessage
+  ResponseMessageError:
+    type: object
+    properties:
+      message:
+        type: array
+        example:
+          - Teste
+        items:
+          type: string
+      status:
+        type: integer
+        format: int32
+        example: 400
+      timestamp:
+        type: string
+        format: date-time
+        example: '2020-08-16 13:10:27'
+    title: ResponseMessageError
+  SignUp:
+    type: object
+    required:
+      - email
+      - password
+      - username
+    properties:
+      email:
+        type: string
+        example: zelda@codenation.com
+        minLength: 0
+        maxLength: 50
+      password:
+        type: string
+        example: C0mput3r
+        minLength: 6
+        maxLength: 40
+      username:
+        type: string
+        example: zelda
+        minLength: 3
+        maxLength: 20
+    title: SignUp
+    description: SignUp
+  Sort:
+    type: object
+    properties:
+      empty:
+        type: boolean
+      sorted:
+        type: boolean
+      unsorted:
+        type: boolean
+    title: Sort

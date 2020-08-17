@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @NoArgsConstructor
-@ApiModel(value = "Request Reset Password", description = "Change Password")
+@ApiModel(description = "Change Password")
 public class ResetPassword {
     @NotBlank(message = "{sign.username.not_blank}")
     @Size(min = 3, max = 20, message = "{sign.username.size}")

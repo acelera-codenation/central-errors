@@ -127,8 +127,7 @@ public class EventController {
             @RequestParam(required = false) String description,
             @RequestParam(required = false) String log,
             @RequestParam(required = false) String origin,
-            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDate date,
-//            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDate date,
+            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,
             @RequestParam(required = false) String quantity,
             @PageableDefault(sort = "date", direction = Sort.Direction.DESC) Pageable pageable) {
         return service.findAll(events, pageable).map(mapEvent::toDTO);
