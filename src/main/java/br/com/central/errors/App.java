@@ -15,9 +15,9 @@ public class App {
         SpringApplication.run(App.class, args);
     }
 
-    @RequestMapping("/")
+    @RequestMapping
     public String home() {
-        return "redirect:/swagger-ui.html";
+        return "redirect:/swagger-ui/index.html";
     }
 
 }

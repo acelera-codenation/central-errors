@@ -60,13 +60,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/swagger-ui/**",
                         "/swagger-resources/**",
-                        "/v2/**",
+                        "/v2/api-docs",
                         "/csrf",
                         "/webjars/**",
                         "/actuator/**",
                         "/auth/**",
-                        "/api/events/search2**",
-                        "/user/register").permitAll()
+                        "/user/register",
+                        "/").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
