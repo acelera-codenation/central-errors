@@ -14,7 +14,7 @@ logging:
   name: /var/log/sample-boot-application.log
   level:
     sql: INFO
-    web: TRACE
+    web: INFO
     io.swagger.models.parameters.AbstractSerializableParameter: error
   #    org.springframework.web: INFO
   #    org.springframework.jdbc.core.JdbcTemplate: INFO
