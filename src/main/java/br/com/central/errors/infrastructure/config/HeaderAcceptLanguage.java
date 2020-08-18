@@ -11,6 +11,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.ANNOTATION_TYPE, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @ApiImplicitParams({
-        @ApiImplicitParam(name = "Accept-Language", value = "en", dataType = "string", paramType = "header")})
+        @ApiImplicitParam(
+                name = "Accept-Language", dataType = "string", value = "en", paramType ="header")})
 public @interface HeaderAcceptLanguage {
 }

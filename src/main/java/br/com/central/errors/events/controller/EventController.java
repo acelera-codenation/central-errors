@@ -107,14 +107,14 @@ public class EventController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(
-            value = "Search events",
+            value = "Search events ?date=2020-07-30&level=WARNING&sort=level,asc&sort=origin,asc",
             notes = "Notes: " +
                     " - Logs are hidden. \n" +
                     " - Results page you want to retrieve (0..N) \n" +
                     " - Number of records per page. \n" +
                     " - Sorting criteria format: property(,asc|desc).\n" +
                     " - Default sort order is ascending.\n" +
-                    " - Multiple sort criteria are supported.",
+                    " - Multiple sort criteria are supported. \n",
             response = EventDTO.class,
             responseContainer = "Page"
     )
@@ -131,7 +131,6 @@ public class EventController {
                     dataType = "string",
                     dataTypeClass = Level.class,
                     allowableValues = "ERROR,INFO,WARNING",
-                    defaultValue = "ERROR",
                     paramType = "query"),
             @ApiImplicitParam(
                     name = "description",
