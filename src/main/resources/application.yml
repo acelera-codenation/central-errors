@@ -28,9 +28,9 @@ logging:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/central-errors
-    username: postgres
-    password: codenation
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/central-errors}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:codenation}
     initialization-mode: always
   jpa:
     hibernate:
@@ -38,7 +38,7 @@ spring:
       format_sql: true
     show-sql: true
     database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: ${SPRING_JPA_DATABASE-PLATFORM:org.hibernate.dialect.PostgreSQLDialect}
     open-in-view: false
     generate-ddl: true
   messages:
