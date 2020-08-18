@@ -22,10 +22,9 @@ logging:
   #    org.hibernate: INFO
   #    org.hibernate.SQL: INFO
   #    org.hibernate.type.descriptor.sql.BasicBinder: INFO
-  pattern:
-    file: '%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID}){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wEx'
-    console: '%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID}){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wEx'
-
+#  pattern:
+#    file: '%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID}){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wEx'
+#    console: '%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID}){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wEx'
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
@@ -37,18 +36,23 @@ spring:
     hibernate:
       ddl-auto: update
       format_sql: true
-    show-sql: false
+    show-sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     open-in-view: false
     generate-ddl: true
-
-
   messages:
     fallback-to-system-locale: true
   data:
     rest:
       defaultMediaType: application/json
+    web:
+      pageable:
+        page-parameter: page
+        size-parameter: page-size
+        one-indexed-parameters: true
+        default-page-size: 10
+        max-page-size: 50
 
 server:
   port: 8086

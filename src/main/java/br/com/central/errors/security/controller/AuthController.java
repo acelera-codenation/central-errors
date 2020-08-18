@@ -1,11 +1,14 @@
 package br.com.central.errors.security.controller;
 
+import br.com.central.errors.infrastructure.config.HeaderAcceptLanguage;
 import br.com.central.errors.infrastructure.message.ResponseMessage;
 import br.com.central.errors.infrastructure.message.ResponseMessageError;
 import br.com.central.errors.security.entity.dto.AccessToken;
 import br.com.central.errors.security.entity.dto.SignIn;
 import br.com.central.errors.security.service.UserService;
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +20,9 @@ import javax.validation.Valid;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping(value = "/auth", produces = MediaType.APPLICATION_JSON_VALUE)
-@Api(value = "auth", tags = "security")
+@Api(value = "auth", tags = "auth")
 @Slf4j
-@ApiImplicitParams({
-        @ApiImplicitParam(
-                name = "Accept-Language", value = "pt-br", dataType = "string", paramType = "header")})
+@HeaderAcceptLanguage
 public class AuthController {
 
     private final UserService service;

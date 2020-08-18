@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 @RestControllerAdvice
 class CustomResponseEntityExceptionHandle extends ResponseEntityExceptionHandler {
-
+//org.springframework.data.mapping.PropertyReferenceException
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                   HttpHeaders headers, HttpStatus status, WebRequest request) {

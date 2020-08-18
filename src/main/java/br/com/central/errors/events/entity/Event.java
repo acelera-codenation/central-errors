@@ -8,13 +8,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 
 @Getter
@@ -32,8 +31,8 @@ public class Event {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    @ApiModelProperty(example = "INFO")
     @Column(name = "level_event")
+    @ApiModelProperty(example = "INFO")
     private Level level;
 
     @NotNull
@@ -41,19 +40,20 @@ public class Event {
     private String description;
 
     @NotNull
-    @ApiModelProperty(example = "Retrograde clock change detected , soft-evicting connections from pool.")
     @Column(name = "log_event")
+    @ApiModelProperty(example = "Retrograde clock change detected , soft-evicting connections from pool.")
     private String log;
 
     @NotNull
-    @ApiModelProperty(example = "o.s.web.servlet.DispatcherServlet")
     @Size(max = 100)
+    @ApiModelProperty(example = "o.s.web.servlet.DispatcherServlet")
     private String origin;
 
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @ApiModelProperty(example = "2020-08-16")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date_event")
+    @ApiModelProperty(example = "2020-08-16")
     private LocalDate date;
 
     @NotNull

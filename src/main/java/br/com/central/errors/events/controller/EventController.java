@@ -6,6 +6,7 @@ import br.com.central.errors.events.entity.dto.EventLogDTO;
 import br.com.central.errors.events.entity.enums.Level;
 import br.com.central.errors.events.mappers.Mappers;
 import br.com.central.errors.events.service.EventServiceImpl;
+import br.com.central.errors.infrastructure.config.HeaderAcceptLanguage;
 import br.com.central.errors.infrastructure.message.ResponseMessageError;
 import com.querydsl.core.types.Predicate;
 import io.swagger.annotations.*;
@@ -15,7 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -29,13 +29,11 @@ import java.time.LocalDate;
 @RequestMapping(value = "/api/events", produces = MediaType.APPLICATION_JSON_VALUE)
 @Api(value = "events", tags = "events")
 @Slf4j
-@ApiImplicitParams({
-        @ApiImplicitParam(
-                name = "Accept-Language", value = "pt-br", dataType = "string", paramType = "header")})
+@HeaderAcceptLanguage
 public class EventController {
 
-    private EventServiceImpl service;
-    private Mappers mapEvent;
+    private final EventServiceImpl service;
+    private final Mappers mapEvent;
 
     public EventController(EventServiceImpl service, Mappers mapEvent) {
         this.service = service;
@@ -67,7 +65,7 @@ public class EventController {
     @ApiResponses({
             @ApiResponse(code = 201, message = "Success", response = EventLogDTO.class),
             @ApiResponse(code = 400, message = "Bad request", response = ResponseMessageError.class),
-            @ApiResponse(code = 401, message = "401 Unauthorized", response = ResponseMessageError.class),
+            @ApiResponse(code = 401, message = "Unauthorized", response = ResponseMessageError.class),
             @ApiResponse(code = 404, message = "Not found", response = ResponseMessageError.class),
             @ApiResponse(code = 500, message = "Internal server error", response = ResponseMessageError.class)
     })
@@ -81,7 +79,7 @@ public class EventController {
     @ApiResponses({
             @ApiResponse(code = 202, message = "Success", response = EventLogDTO.class),
             @ApiResponse(code = 400, message = "Bad request", response = ResponseMessageError.class),
-            @ApiResponse(code = 401, message = "401 Unauthorized", response = ResponseMessageError.class),
+            @ApiResponse(code = 401, message = "Unauthorized", response = ResponseMessageError.class),
             @ApiResponse(code = 404, message = "Not found", response = ResponseMessageError.class),
             @ApiResponse(code = 500, message = "Internal server error", response = ResponseMessageError.class)
     })
@@ -96,7 +94,7 @@ public class EventController {
     @DeleteMapping("/{id}")
     @ApiResponses({
             @ApiResponse(code = 204, message = "Success"),
-            @ApiResponse(code = 401, message = "401 Unauthorized", response = ResponseMessageError.class),
+            @ApiResponse(code = 401, message = "Unauthorized", response = ResponseMessageError.class),
             @ApiResponse(code = 404, message = "Resource not found", response = ResponseMessageError.class),
             @ApiResponse(code = 500, message = "Internal server error", response = ResponseMessageError.class)
     })
@@ -110,26 +108,71 @@ public class EventController {
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(
             value = "Search events",
-            notes = "Search events by: Level, Description, log, Origin, Date and Quantity. Note: At this endpoint you" +
-                    " can't see log properties.",
+            notes = "Notes: " +
+                    " - Logs are hidden. \n" +
+                    " - Results page you want to retrieve (0..N) \n" +
+                    " - Number of records per page. \n" +
+                    " - Sorting criteria format: property(,asc|desc).\n" +
+                    " - Default sort order is ascending.\n" +
+                    " - Multiple sort criteria are supported.",
             response = EventDTO.class,
-            responseContainer = "Page")
+            responseContainer = "Page"
+    )
     @ApiResponses({
             @ApiResponse(code = 200, message = "Success", response = EventDTO[].class),
             @ApiResponse(code = 400, message = "Bad request", response = ResponseMessageError.class),
-            @ApiResponse(code = 401, message = "401 Unauthorized", response = ResponseMessageError.class),
+            @ApiResponse(code = 401, message = "Unauthorized", response = ResponseMessageError.class),
             @ApiResponse(code = 404, message = "Not found", response = ResponseMessageError.class),
             @ApiResponse(code = 500, message = "Internal server error", response = ResponseMessageError.class)
     })
+    @ApiImplicitParams({
+            @ApiImplicitParam(
+                    name = "level",
+                    dataType = "string",
+                    dataTypeClass = Level.class,
+                    allowableValues = "ERROR,INFO,WARNING",
+                    defaultValue = "ERROR",
+                    paramType = "query"),
+            @ApiImplicitParam(
+                    name = "description",
+                    dataType = "string",
+                    dataTypeClass = String.class,
+                    paramType = "query"),
+            @ApiImplicitParam(
+                    name = "log",
+                    dataType = "string",
+                    dataTypeClass = String.class,
+                    paramType = "query"),
+            @ApiImplicitParam(
+                    name = "origin",
+                    dataType = "string",
+                    dataTypeClass = String.class,
+                    paramType = "query"),
+            @ApiImplicitParam(
+                    name = "date",
+                    dataType = "string",
+                    dataTypeClass = LocalDate.class,
+                    format = "yyyy-MM-dd",
+                    paramType = "query"),
+            @ApiImplicitParam(
+                    name = "quantity",
+                    dataType = "integer",
+                    paramType = "query"),
+            @ApiImplicitParam(
+                    name = "page",
+                    dataType = "integer",
+                    paramType = "query"),
+            @ApiImplicitParam(
+                    name = "size",
+                    dataType = "integer",
+                    paramType = "query"),
+            @ApiImplicitParam(
+                    name = "sort",
+                    allowMultiple = true,
+                    dataType = "string",
+                    paramType = "query")})
     public Page<EventDTO> findAll(
-            @QuerydslPredicate(root = Event.class) Predicate events,
-            @RequestParam(required = false) Level level,
-            @RequestParam(required = false) String description,
-            @RequestParam(required = false) String log,
-            @RequestParam(required = false) String origin,
-            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,
-            @RequestParam(required = false) String quantity,
-            @PageableDefault(sort = "date", direction = Sort.Direction.DESC) Pageable pageable) {
+            @QuerydslPredicate(root = Event.class) Predicate events, Pageable pageable) {
         return service.findAll(events, pageable).map(mapEvent::toDTO);
     }
 }
