@@ -58,7 +58,12 @@ spring:
   boot:
     admin:
       client:
-        url: ${SPRING_ADMIN_URL:http://localhost:8085}
+        url: ${SPRING_BOOT_ADMIN_URL:http://localhost:8085}
+        instance:
+          management-base-url: ${SPRING_BOOT_CLIENT_URL:http://localhost:${server.port}}
+          service-base-url: ${spring.boot.admin.client.instance.management-base-url}
+        auto-deregistration: true
+        period: 5m
 server:
   port: 8086
   servlet.contextPath: /
