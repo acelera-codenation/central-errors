@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 @RestControllerAdvice
 class CustomResponseEntityExceptionHandle extends ResponseEntityExceptionHandler {
-//org.springframework.data.mapping.PropertyReferenceException
+    //org.springframework.data.mapping.PropertyReferenceException
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                   HttpHeaders headers, HttpStatus status, WebRequest request) {
@@ -43,9 +43,7 @@ class CustomResponseEntityExceptionHandle extends ResponseEntityExceptionHandler
                 Collections.singletonList(CustomTranslator.toLocale("user.auth.unauthorized_user"))
         );
 
-        return ResponseEntity
-                .status(HttpStatus.UNAUTHORIZED)
-                .body(response);
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
     }
 
     @ExceptionHandler({ConstraintViolationException.class})
@@ -53,16 +51,13 @@ class CustomResponseEntityExceptionHandle extends ResponseEntityExceptionHandler
         Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
 
         List<String> msg = constraintViolations.stream()
-                .map(constraintViolation -> constraintViolation.getMessage())
+                .map(ConstraintViolation::getMessage)
                 .collect(Collectors.toList());
-
 
         ResponseMessageError response = new ResponseMessageError(
                 HttpStatus.BAD_REQUEST.value(), msg);
 
-        return ResponseEntity
-                .badRequest()
-                .body(response);
+        return ResponseEntity.badRequest().body(response);
     }
 
 }

@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -76,8 +76,9 @@ class EventControllerTest extends AbstractTest {
                 .andExpect(status().isOk()).andReturn();
 
         assertFalse(result.getResponse().getContentAsString().contains("log:"));
-    }@Test
+    }
 
+    @Test
     void whenFindAllEventsByMultipleFields() throws Exception {
         mvc.perform(get(
                 "/api/events?date=2020-07-30&description=ID-1&level=WARNING&origin=ControllerAdvice beans&page=0" +
