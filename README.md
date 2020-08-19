@@ -2,7 +2,7 @@
 
 ![Java CI with Gradle](https://github.com/acelera-codenation/erros-center/workflows/Java%20CI%20with%20Gradle/badge.svg)
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=acelera-codenation_erros-center&metric=alert_status)](https://sonarcloud.io/dashboard?id=acelera-codenation_erros-center)
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=acelera-codenation_erros-center&branch=master)](https://sonarcloud.io/dashboard?id=acelera-codenation_erros-center)
 
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=acelera-codenation_erros-center&metric=coverage)](https://sonarcloud.io/dashboard?id=acelera-codenation_erros-center)
 
@@ -35,3 +35,10 @@ Abaixo estão os requisitos desta API, o time terá total liberdade para tomar a
     - Deve suportar Ordenação por diferentes tipos de atributos
     - A consulta de listagem não deve retornar os LOGs dos Eventos
     - Deve permitir a busca de um evento por um ID, dessa maneira exibindo o LOG desse evento em específico
+    
+    
+## Demo
+
+[Api Central de Erros](https://centralerrors.herokuapp.com)
+
+![Alt Text](./docs/demo.png)
