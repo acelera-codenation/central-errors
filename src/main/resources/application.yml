@@ -58,7 +58,7 @@ spring:
   boot:
     admin:
       client:
-        url: http://localhost:8085
+        url: ${SPRING_ADMIN_URL:http://localhost:8085}
 server:
   port: 8086
   servlet.contextPath: /
