@@ -88,6 +88,22 @@ class EventControllerTest extends AbstractTest {
     }
 
     @Test
+    void whenFindAllEventsUsingBetweenQuantityFilterFields() throws Exception {
+        mvc.perform(get(
+                "/api/events?quantity=2&quantity=3")
+                .header("Authorization", getAuthToken()))
+                .andExpect(jsonPath("$.content", hasSize(2)));
+    }
+
+    @Test
+    void whenFindAllEventsThatQuantityIsEqualValue() throws Exception {
+        mvc.perform(get(
+                "/api/events?quantity=3")
+                .header("Authorization", getAuthToken()))
+                .andExpect(jsonPath("$.content", hasSize(1)));
+    }
+
+    @Test
     void whenFindEventById() throws Exception {
         ResultActions result = mvc.perform(get("/api/events/1")
                 .header("Authorization", getAuthToken()))

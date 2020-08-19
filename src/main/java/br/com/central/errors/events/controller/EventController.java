@@ -105,7 +105,7 @@ public class EventController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(
-            value = "Search events ?date=2020-07-30&level=WARNING&sort=level,asc&sort=origin,asc",
+            value = "Search events",
             notes = "Notes: " +
                     " - Logs are hidden. \n" +
                     " - Results page you want to retrieve (0..N) \n" +
