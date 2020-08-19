@@ -53,6 +53,7 @@ dependencies {
             'org.springframework.boot:spring-boot-starter-security',
             'org.springframework.boot:spring-boot-configuration-processor',
             'de.codecentric:spring-boot-admin-starter-client',
+            'org.springframework.boot:spring-boot-starter-cache',
             "io.springfox:springfox-bean-validators:${springfoxVersion}",
             "io.springfox:springfox-boot-starter:${springfoxVersion}",
             "io.springfox:springfox-oas:${springfoxVersion}",

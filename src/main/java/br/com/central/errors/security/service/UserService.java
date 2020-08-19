@@ -8,6 +8,7 @@ import br.com.central.errors.security.entity.dto.ResetPassword;
 import br.com.central.errors.security.exceptions.PasswordMatchException;
 import br.com.central.errors.security.repository.UserRepository;
 import br.com.central.errors.security.service.interfaces.UserInterface;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -38,6 +39,7 @@ public class UserService implements UserDetailsService, UserInterface {
     }
 
     @Override
+    @Cacheable(value = "user", key = "#username", unless = "#result == null")
     public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String username) {
         User user = repository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException(CustomTranslator.toLocale("user.not_found", username)));
