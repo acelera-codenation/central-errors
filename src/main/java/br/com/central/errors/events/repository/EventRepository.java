@@ -10,6 +10,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.Iterator;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public interface EventRepository extends PagingAndSortingRepository<Event, Long>, QuerydslPredicateExecutor<Event>,
         QuerydslBinderCustomizer<QEvent> {
@@ -21,12 +22,12 @@ public interface EventRepository extends PagingAndSortingRepository<Event, Long>
 
         bindings.bind(event.quantity).all((path, value) -> {
             Iterator<? extends Integer> it = value.iterator();
-            Integer from = it.next();
-            if (value.size() >= 2) {
+            if (value.size() == 2) {
+                Integer from = it.next();
                 Integer to = it.next();
                 return Optional.of(path.between(from, to));
             } else {
-                return Optional.of(path.goe(from));
+                return Optional.of(path.in(value.stream().collect(Collectors.toList())));
             }
         });
 
