@@ -26,6 +26,8 @@ logging:
 #    file: '%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID}){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wEx'
 #    console: '%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID}){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wEx'
 spring:
+  application:
+    name: central-errors
   datasource:
     driver-class-name: org.postgresql.Driver
     url: ${SPRING_DATABASE_URL:jdbc:postgresql://localhost:5432/central-errors}
@@ -53,7 +55,10 @@ spring:
         one-indexed-parameters: true
         default-page-size: 10
         max-page-size: 50
-
+  boot:
+    admin:
+      client:
+        url: http://localhost:8085
 server:
   port: 8086
   servlet.contextPath: /
@@ -67,6 +72,7 @@ app:
   info:
     title: Central Errors
     name: central-errors
+    app.name: ${project.name}
   jwt:
     secret: codenationKey
     expirationTime: 86400000
