@@ -18,6 +18,7 @@ ext {
     springfoxVersion = '3.0.0'
     javaxValidationVersion = '2.0.1.Final'
     springBootAdminVersion = '2.3.0'
+    cafeineCacheVersion = '2.8.5'
 }
 
 configurations {
@@ -54,6 +55,7 @@ dependencies {
             'org.springframework.boot:spring-boot-configuration-processor',
             'de.codecentric:spring-boot-admin-starter-client',
             'org.springframework.boot:spring-boot-starter-cache',
+            "com.github.ben-manes.caffeine:caffeine:${cafeineCacheVersion}",
             "io.springfox:springfox-bean-validators:${springfoxVersion}",
             "io.springfox:springfox-boot-starter:${springfoxVersion}",
             "io.springfox:springfox-oas:${springfoxVersion}",
