@@ -8,9 +8,10 @@ import br.com.central.errors.security.entity.dto.ResetPassword;
 import br.com.central.errors.security.exceptions.PasswordMatchException;
 import br.com.central.errors.security.repository.UserRepository;
 import br.com.central.errors.security.service.interfaces.UserInterface;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
+@Slf4j
 public class UserService implements UserDetailsService, UserInterface {
 
     private UserRepository repository;
@@ -38,28 +40,27 @@ public class UserService implements UserDetailsService, UserInterface {
         this.encoder = encoder;
     }
 
+
     @Override
     @Cacheable(value = "user", key = "#username", unless = "#result == null")
     public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String username) {
-        User user = repository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException(CustomTranslator.toLocale("user.not_found", username)));
-        return UserDetailsCustom.build(user);
+        return UserDetailsCustom.build(findUser(username));
+    }
+
+    private User findUser(String username) {
+        return repository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException(CustomTranslator.toLocale("user.not_found")));
     }
 
     @Override
     public <S extends User> S save(S user) {
+
+        if (repository.existsByUsername(user.getUsername())) throw new BadCredentialsException("sign.user.exists");
+
+        if (repository.existsByEmail(user.getEmail())) throw new BadCredentialsException("sign.email.exists");
+
         user.setPassword(encoder.encode(user.getPassword()));
         return repository.save(user);
-    }
-
-    @Override
-    public boolean existsByUsername(String username) {
-        return repository.existsByUsername(username);
-    }
-
-    @Override
-    public boolean existsByEmail(String email) {
-        return repository.existsByEmail(email);
     }
 
     @Override
@@ -75,7 +76,6 @@ public class UserService implements UserDetailsService, UserInterface {
                 userDetailsCustom.getId(),
                 userDetailsCustom.getUsername(),
                 userDetailsCustom.getEmail());
-
     }
 
     @Override
@@ -85,7 +85,7 @@ public class UserService implements UserDetailsService, UserInterface {
             throw new PasswordMatchException("user.password_wrong");
         }
 
-        User user = repository.findByUsername(account.getUsername()).orElseThrow(ResourceNotFoundException::new);
+        User user = findUser(account.getUsername());
 
         if (!encoder.matches(account.getPassword(), user.getPassword()))
             throw new PasswordMatchException("user.password_wrong");

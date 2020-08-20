@@ -169,7 +169,8 @@ public class EventController {
                     dataType = "string",
                     paramType = "query")})
     public Page<EventDTO> findAll(
-            @QuerydslPredicate(root = Event.class) Predicate events, Pageable pageable) {
+            @QuerydslPredicate(root = Event.class) Predicate events,
+            Pageable pageable) {
         return service.findAll(events, pageable).map(mapEvent::toDTO);
     }
 }
