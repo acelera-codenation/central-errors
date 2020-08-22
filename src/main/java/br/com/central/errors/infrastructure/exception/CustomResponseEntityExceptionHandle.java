@@ -18,8 +18,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
-import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
@@ -38,6 +39,7 @@ class CustomResponseEntityExceptionHandle extends ResponseEntityExceptionHandler
 
         return new ResponseEntity<>(response, headers, status);
     }
+
     @ExceptionHandler({CustomNotFoundException.class})
     protected ResponseEntity<Object> notFound(CustomNotFoundException e) {
 
