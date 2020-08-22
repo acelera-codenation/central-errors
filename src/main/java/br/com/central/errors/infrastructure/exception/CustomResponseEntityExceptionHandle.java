@@ -25,8 +25,7 @@ class CustomResponseEntityExceptionHandle extends ResponseEntityExceptionHandler
     @ExceptionHandler({CustomNotFoundException.class})
     protected ResponseEntity<Object> notFound(CustomNotFoundException e) {
 
-        ResponseMessageError response = new ResponseMessageError(
-                HttpStatus.NOT_FOUND.value(),
+        ResponseMessageError response = new ResponseMessageError(404,
                 Collections.singletonList(CustomTranslator.toLocale("resource.not_found"
                         , e.getClazz().getSimpleName())));
 
@@ -36,8 +35,7 @@ class CustomResponseEntityExceptionHandle extends ResponseEntityExceptionHandler
     @ExceptionHandler({PropertyReferenceException.class})
     protected ResponseEntity<Object> handlerPropertyReference(PropertyReferenceException e) {
 
-        ResponseMessageError response = new ResponseMessageError(
-                HttpStatus.BAD_REQUEST.value(),
+        ResponseMessageError response = new ResponseMessageError(400,
                 Collections.singletonList(CustomTranslator.toLocale("invalid.reference.property"
                         , e.getPropertyName()
                         , e.getType().getType().getSimpleName()))
@@ -49,8 +47,7 @@ class CustomResponseEntityExceptionHandle extends ResponseEntityExceptionHandler
     @ExceptionHandler({ExpiredJwtException.class})
     protected ResponseEntity<Object> handlerTokenException(PropertyReferenceException e) {
 
-        ResponseMessageError response = new ResponseMessageError(
-                HttpStatus.BAD_REQUEST.value(),
+        ResponseMessageError response = new ResponseMessageError(400,
                 Collections.singletonList(CustomTranslator.toLocale("jwt.invalid_sign"))
         );
 
@@ -60,8 +57,7 @@ class CustomResponseEntityExceptionHandle extends ResponseEntityExceptionHandler
     @ExceptionHandler({BadCredentialsException.class})
     public ResponseEntity<ResponseMessageError> credentialsException(BadCredentialsException e) {
 
-        ResponseMessageError response = new ResponseMessageError(
-                HttpStatus.UNAUTHORIZED.value(),
+        ResponseMessageError response = new ResponseMessageError(401,
                 Collections.singletonList(CustomTranslator.toLocale(e.getMessage()))
         );
 
@@ -76,10 +72,7 @@ class CustomResponseEntityExceptionHandle extends ResponseEntityExceptionHandler
                 .map(ConstraintViolation::getMessage)
                 .collect(Collectors.toList());
 
-        ResponseMessageError response = new ResponseMessageError(
-                HttpStatus.BAD_REQUEST.value(), msg);
-
-        return ResponseEntity.badRequest().body(response);
+        return ResponseEntity.badRequest().body(new ResponseMessageError(400, msg));
     }
 
 }

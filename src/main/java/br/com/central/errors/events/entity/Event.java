@@ -36,7 +36,7 @@ public class Event {
     private Level level;
 
     @NotNull
-    @ApiModelProperty(example = "Triggering deferred initialization of Spring Data repositories…")
+    @ApiModelProperty(example = "Spring Data repositories…")
     private String description;
 
     @NotNull
@@ -46,7 +46,7 @@ public class Event {
 
     @NotNull
     @Size(max = 100)
-    @ApiModelProperty(example = "o.s.web.servlet.DispatcherServlet")
+    @ApiModelProperty(example = "DispatcherServlet")
     private String origin;
 
     @NotNull

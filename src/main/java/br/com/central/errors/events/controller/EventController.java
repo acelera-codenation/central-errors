@@ -40,7 +40,6 @@ public class EventController {
     }
 
     @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
     @ApiOperation(
             value = "Find event by {id}",
             notes = "All event information was returned",
@@ -57,12 +56,11 @@ public class EventController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(
             value = "Save event",
             response = EventLogDTO.class)
     @ApiResponses({
-            @ApiResponse(code = 201, message = "Success", response = EventLogDTO.class),
+            @ApiResponse(code = 201, message = "Created", response = EventLogDTO.class),
             @ApiResponse(code = 400, message = "Bad request", response = ResponseMessageError.class),
             @ApiResponse(code = 401, message = "Unauthorized", response = ResponseMessageError.class),
             @ApiResponse(code = 404, message = "Not found", response = ResponseMessageError.class),
@@ -74,9 +72,8 @@ public class EventController {
     }
 
     @PatchMapping("/{id}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
     @ApiResponses({
-            @ApiResponse(code = 202, message = "Success", response = EventLogDTO.class),
+            @ApiResponse(code = 202, message = "Accepted", response = EventLogDTO.class),
             @ApiResponse(code = 400, message = "Bad request", response = ResponseMessageError.class),
             @ApiResponse(code = 401, message = "Unauthorized", response = ResponseMessageError.class),
             @ApiResponse(code = 404, message = "Not found", response = ResponseMessageError.class),
@@ -92,7 +89,7 @@ public class EventController {
 
     @DeleteMapping("/{id}")
     @ApiResponses({
-            @ApiResponse(code = 204, message = "Success"),
+            @ApiResponse(code = 204, message = "No content"),
             @ApiResponse(code = 401, message = "Unauthorized", response = ResponseMessageError.class),
             @ApiResponse(code = 404, message = "Resource not found", response = ResponseMessageError.class),
             @ApiResponse(code = 500, message = "Internal server error", response = ResponseMessageError.class)
@@ -104,7 +101,6 @@ public class EventController {
     }
 
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
     @ApiOperation(
             value = "Search events",
             notes = "Notes: " +
