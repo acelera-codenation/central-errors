@@ -14,7 +14,6 @@ import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,10 +40,6 @@ public class UserController {
             @ApiResponse(code = 500, message = "Internal server error", response = ResponseMessageError.class)
     })
     public ResponseEntity<ResponseMessage> register(@Valid @RequestBody SignUp signUp) {
-        if (service.existsByUsername(signUp.getUsername())) throw new BadCredentialsException("sign.user.exists");
-
-        if (service.existsByEmail(signUp.getEmail())) throw new BadCredentialsException("sign.email.exists");
-
         User user = new User(signUp.getUsername(), signUp.getEmail(), signUp.getPassword());
         service.save(user);
         return ResponseEntity.ok(new ResponseMessage(CustomTranslator.toLocale("sign.register.success")));

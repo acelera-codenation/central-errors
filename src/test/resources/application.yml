@@ -24,8 +24,11 @@ security:
       id: id
       client-secret: test
 
-api:
-  app:
-    jwt:
-      secret: teste
-      expirationTime: 6000
+
+app:
+  jwt:
+    secret: teste
+    expirationTime: 6000
+
+cron:
+  expression: 0/5 0 0 ? * * *

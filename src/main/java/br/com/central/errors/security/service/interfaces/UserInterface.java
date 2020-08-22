@@ -9,10 +9,6 @@ public interface UserInterface {
 
     <S extends User> S save(S user);
 
-    boolean existsByUsername(String username);
-
-    boolean existsByEmail(String email);
-
     AccessToken login(Object principal, Object credentials);
 
     void changeUserPassword(final ResetPassword user);

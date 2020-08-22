@@ -36,7 +36,7 @@ spring:
     initialization-mode: always
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
       format_sql: true
     show-sql: true
     database: postgresql
@@ -48,13 +48,13 @@ spring:
   data:
     rest:
       defaultMediaType: application/json
-    web:
-      pageable:
-        page-parameter: page
-        size-parameter: page-size
-        one-indexed-parameters: true
-        default-page-size: 10
-        max-page-size: 50
+#    web:
+#      pageable:
+#        page-parameter: page
+#        size-parameter: page-size
+#        one-indexed-parameters: true
+#        default-page-size: 10
+#        max-page-size: 50
   boot:
     admin:
       client:
@@ -64,6 +64,14 @@ spring:
           service-base-url: ${spring.boot.admin.client.instance.management-base-url}
         auto-deregistration: true
         period: 5m
+
+  cache:
+    cache-names: event, user
+    type: caffeine
+    caffeine:
+      spec: maximumSize=500,expireAfterAccess=60s
+
+
 server:
   port: 8086
   servlet.contextPath: /
@@ -81,3 +89,4 @@ app:
   jwt:
     secret: codenationKey
     expirationTime: 86400000
+
