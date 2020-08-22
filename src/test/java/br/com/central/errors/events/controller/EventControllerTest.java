@@ -88,6 +88,14 @@ class EventControllerTest extends AbstractTest {
     }
 
     @Test
+    void whenFindAllEventsInvalidField() throws Exception {
+        mvc.perform(get(
+                "/api/events?quantity=1&size=1&sort=InvalidFieldlevel,asc")
+                .header("Authorization", getAuthToken()))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
     void whenFindAllEventsUsingBetweenQuantityFilterFields() throws Exception {
         mvc.perform(get(
                 "/api/events?quantity=2&quantity=3")
@@ -129,6 +137,14 @@ class EventControllerTest extends AbstractTest {
         EventLogDTO eventSaved = getContentEventLogResponse(result);
 
         assertNotNull(eventSaved.getId());
+    }
+
+    @Test
+    void whenSaveEventError() throws Exception {
+        mvc.perform(post("/api/events")
+                .header("Authorization", getAuthToken())
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
     }
 
     @Test
