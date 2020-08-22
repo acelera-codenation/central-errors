@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -170,7 +171,7 @@ public class EventController {
                     paramType = "query")})
     public Page<EventDTO> findAll(
             @QuerydslPredicate(root = Event.class) Predicate events,
-            Pageable pageable) {
+            @PageableDefault Pageable pageable) {
         return service.findAll(events, pageable).map(mapEvent::toDTO);
     }
 }

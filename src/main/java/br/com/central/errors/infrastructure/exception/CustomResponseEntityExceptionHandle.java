@@ -33,19 +33,6 @@ class CustomResponseEntityExceptionHandle extends ResponseEntityExceptionHandler
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
 
-//    @ExceptionHandler({MethodArgumentNotValidException.class})
-//    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-//                                                                  HttpHeaders headers, HttpStatus status, WebRequest request) {
-//        Map<String, Object> body = new LinkedHashMap<>();
-//        body.put("timestamp", LocalDateTime.now());
-//        body.put("status", status.value());
-//        body.put("errors", ex.getBindingResult().getFieldErrors().stream()
-//                .map(DefaultMessageSourceResolvable::getDefaultMessage)
-//                .collect(Collectors.toList()));
-//
-//        return new ResponseEntity<>(body, headers, status);
-//    }
-
     @ExceptionHandler({PropertyReferenceException.class})
     protected ResponseEntity<Object> handlerPropertyReference(PropertyReferenceException e) {
 
