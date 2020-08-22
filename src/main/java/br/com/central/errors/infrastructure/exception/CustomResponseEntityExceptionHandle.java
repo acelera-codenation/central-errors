@@ -64,7 +64,7 @@ class CustomResponseEntityExceptionHandle extends ResponseEntityExceptionHandler
     }
 
     @ExceptionHandler({ExpiredJwtException.class})
-    protected ResponseEntity<Object> handlerTokenException(PropertyReferenceException e) {
+    protected ResponseEntity<Object> handlerTokenException(ExpiredJwtException e) {
         log.error(e.getMessage(), e);
         ResponseMessageError response = new ResponseMessageError(400,
                 Collections.singletonList(CustomTranslator.toLocale("jwt.invalid_sign"))

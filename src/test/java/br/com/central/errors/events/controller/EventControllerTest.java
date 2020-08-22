@@ -183,7 +183,6 @@ class EventControllerTest extends AbstractTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated()).andReturn();
 
-
         EventLogDTO eventSaved = getContentEventLogResponse(result);
 
         assertNotNull(eventSaved.getId());
