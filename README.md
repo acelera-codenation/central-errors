@@ -44,5 +44,6 @@ Abaixo estão os requisitos desta API, o time terá total liberdade para tomar a
  - [Gerenciamento das Tarefas - Board](https://github.com/orgs/acelera-codenation/projects/1) 
  - [Spring Admin](https://central-admin.herokuapp.com/applications)
  - [Postman](https://samuelsantos-dev.postman.co/collections/1130955-57bc8d31-fda0-4ae3-b7e3-3080ed91fc75?version=latest&workspace=ba1f86a7-4d07-4597-bcc3-b23c3c58956a)
+ - [Slides da Apresentação](./docs/index.html)
 
 ![Alt Text](./docs/demo.png)
