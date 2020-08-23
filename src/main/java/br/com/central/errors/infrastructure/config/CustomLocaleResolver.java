@@ -11,19 +11,6 @@ import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 @Configuration
 public class CustomLocaleResolver extends AcceptHeaderLocaleResolver implements WebMvcConfigurer {
 
-//    private static final List<Locale> LOCALES = Arrays.asList(
-//            new Locale("en"),
-//            new Locale("pt", "BR"));
-//
-//    @Override
-//    public Locale resolveLocale(HttpServletRequest request) {
-//        String headerLang = request.getHeader("Accept-Language");
-//
-//        return headerLang == null || headerLang.isEmpty()
-//                ? Locale.ENGLISH
-//                : Locale.lookup(Locale.LanguageRange.parse(headerLang), LOCALES);
-//    }
-
     @Bean
     public ResourceBundleMessageSource messageSource() {
         ResourceBundleMessageSource rs = new ResourceBundleMessageSource();
