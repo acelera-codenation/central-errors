@@ -37,8 +37,11 @@ Abaixo estão os requisitos desta API, o time terá total liberdade para tomar a
     - Deve permitir a busca de um evento por um ID, dessa maneira exibindo o LOG desse evento em específico
     
     
-## Demo
+## Links
 
-[Api Central de Erros](https://centralerrors.herokuapp.com)
+ - [Demo - Api Central de Erros](https://centralerrors.herokuapp.com) 
+ - [Sonar (_Métricas_)](https://sonarcloud.io/dashboard?id=acelera-codenation_erros-center)
+ - [Gerenciamento das Tarefas - Board](https://github.com/orgs/acelera-codenation/projects/1) 
+ - [Postman](https://samuelsantos-dev.postman.co/collections/1130955-57bc8d31-fda0-4ae3-b7e3-3080ed91fc75?version=latest&workspace=ba1f86a7-4d07-4597-bcc3-b23c3c58956a)
 
 ![Alt Text](./docs/demo.png)
