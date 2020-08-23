@@ -6,7 +6,7 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 @Getter
 public class CustomNotFoundException extends ResourceNotFoundException {
 
-    private Class clazz;
+    private final Class clazz;
 
     public CustomNotFoundException(Class clazz) {
         this.clazz = clazz;
