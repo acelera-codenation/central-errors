@@ -17,19 +17,18 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class EventServiceImpl implements EventServiceInterface {
 
-    @Bean("customKeyGenerator")
-    public CacheKeyGenerator keyGenerator() {
-        return new CacheKeyGenerator();
-    }
-
     private EventRepository repository;
 
     public EventServiceImpl(EventRepository repository) {
         this.repository = repository;
     }
 
+    @Bean("customKeyGenerator")
+    public CacheKeyGenerator keyGenerator() {
+        return new CacheKeyGenerator();
+    }
+
     @Override
-    @Cacheable(value = "event", key = "#id", unless = "#result == null")
     public Event findById(Long id) {
         return repository.findById(id).orElseThrow(() -> new CustomNotFoundException(Event.class));
     }

@@ -35,7 +35,7 @@ public class UserController {
 
     @PostMapping("/register")
     @ApiResponses({
-            @ApiResponse(code = 202, message = "Success", response = ResponseMessage.class),
+            @ApiResponse(code = 201, message = "Created", response = ResponseMessage.class),
             @ApiResponse(code = 400, message = "Bad request", response = ResponseMessageError.class),
             @ApiResponse(code = 500, message = "Internal server error", response = ResponseMessageError.class)
     })
@@ -47,7 +47,7 @@ public class UserController {
 
     @PostMapping("/resetpassword")
     @ApiResponses({
-            @ApiResponse(code = 202, message = "Success", response = ResponseMessage.class),
+            @ApiResponse(code = 202, message = "Accepted", response = ResponseMessage.class),
             @ApiResponse(code = 400, message = "Bad request", response = ResponseMessageError.class),
             @ApiResponse(code = 401, message = "Unauthorized", response = ResponseMessageError.class),
             @ApiResponse(code = 404, message = "Not found", response = ResponseMessageError.class),

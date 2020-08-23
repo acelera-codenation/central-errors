@@ -88,6 +88,14 @@ class EventControllerTest extends AbstractTest {
     }
 
     @Test
+    void whenFindAllEventsInvalidField() throws Exception {
+        mvc.perform(get(
+                "/api/events?quantity=1&size=1&sort=InvalidFieldlevel,asc")
+                .header("Authorization", getAuthToken()))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
     void whenFindAllEventsUsingBetweenQuantityFilterFields() throws Exception {
         mvc.perform(get(
                 "/api/events?quantity=2&quantity=3")
@@ -132,6 +140,14 @@ class EventControllerTest extends AbstractTest {
     }
 
     @Test
+    void whenSaveEventError() throws Exception {
+        mvc.perform(post("/api/events")
+                .header("Authorization", getAuthToken())
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
     void whenUpdateEvent() throws Exception {
         String token = getAuthToken();
 
@@ -166,7 +182,6 @@ class EventControllerTest extends AbstractTest {
                 .header("Accept-Language", "pt-br")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated()).andReturn();
-
 
         EventLogDTO eventSaved = getContentEventLogResponse(result);
 

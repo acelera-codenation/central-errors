@@ -48,13 +48,13 @@ spring:
   data:
     rest:
       defaultMediaType: application/json
-#    web:
-#      pageable:
-#        page-parameter: page
-#        size-parameter: page-size
-#        one-indexed-parameters: true
-#        default-page-size: 10
-#        max-page-size: 50
+  #    web:
+  #      pageable:
+  #        page-parameter: page
+  #        size-parameter: page-size
+  #        one-indexed-parameters: true
+  #        default-page-size: 10
+  #        max-page-size: 50
   boot:
     admin:
       client:

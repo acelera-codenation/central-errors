@@ -29,12 +29,12 @@ public class EventDTO {
 
     @NotBlank(message = "{NotBlank.eventLogDTO.description}")
     @Size(max = 255, message = "{Max.eventLogDTO.description}")
-    @ApiModelProperty(example = "Triggering deferred initialization of Spring Data repositories…", required = true)
+    @ApiModelProperty(example = "Spring Data repositories…", required = true)
     private String description;
 
     @NotBlank(message = "{NotBlank.eventLogDTO.origin}")
     @Size(min = 0, max = 100, message = "{Max.eventLogDTO.origin}")
-    @ApiModelProperty(example = "o.s.web.servlet.DispatcherServlet", required = true)
+    @ApiModelProperty(example = "DispatcherServlet", required = true)
     private String origin;
 
     @NotNull(message = "{NotNull.eventLogDTO.date}")

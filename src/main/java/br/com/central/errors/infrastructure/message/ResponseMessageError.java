@@ -16,7 +16,7 @@ public class ResponseMessageError {
     @ApiModelProperty(example = "400")
     private Integer status;
 
-    @ApiModelProperty(example = "[Teste]")
+    @ApiModelProperty(example = "[Resource not found]")
     private List<String> message;
 
     public ResponseMessageError(Integer status, List<String> message) {

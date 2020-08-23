@@ -10,7 +10,7 @@ import lombok.Getter;
 @ApiModel(value = "ResponseMessage")
 public class ResponseMessage {
 
-    @ApiModelProperty(example = "Update success")
+    @ApiModelProperty(example = "Success message")
     private String message;
 
 }
